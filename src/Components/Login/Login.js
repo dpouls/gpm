@@ -10,9 +10,10 @@ const Login = (props) => {
   //     console.log(password)
   // },[password])
   const login = (e) => {
-    console.log("hit");
-    Axios.post("/auth/login", { username, password }).then((res) =>
-      props.history.push("/portal")
+    Axios.post("/auth/login", { username, password }).then((res) => {
+        console.log(res.data)
+        props.history.push("/portal")
+    }
     );
     setUsername("");
     setPassword("");

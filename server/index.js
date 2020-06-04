@@ -3,6 +3,7 @@ const express = require('express'),
       massive = require('massive'),
       session = require('express-session'),
       ac = require('./controllers/authController'),
+      uc = require('./controllers/userController'),
       app = express();
 
 const {SERVER_PORT, CONNECTION_STRING,SESSION_SECRET} = process.env
@@ -26,6 +27,9 @@ app.post('/auth/login', ac.login)
 app.post('/auth/register', ac.register)
 app.post('/auth/logout', ac.logout)
 app.get('/auth/currentuser')
+
+//User Endpoints
+app.get('/api/user', uc.getUserInfo)
 
 
 app.listen(SERVER_PORT, () => console.log(`Server running on port ${SERVER_PORT}`))
