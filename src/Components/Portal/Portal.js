@@ -2,8 +2,11 @@ import React from 'react'
 
 const Portal = (props) => {
     return (
+        
         <div>
-            portal
+            <div>
+        {/* <p>Hello {user.username}</p> */}
+            </div>
         </div>
     )
 }

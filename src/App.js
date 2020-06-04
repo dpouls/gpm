@@ -1,15 +1,22 @@
-import React from 'react';
-import './App.css';
-import Header from './Components/Header/Header'
-import routes from './routes'
+import React from "react";
+import "./App.scss";
+import Header from "./Components/Header/Header";
+import routes from "./routes";
+import { withRouter } from "react-router-dom";
 
-function App() {
+function App(props) {
   return (
     <div className="App">
-      <Header/>
-      {routes}
-      </div>
+      {props.location.pathname !== "/login" ? (
+        <>
+          <Header />
+          {routes}
+        </>
+      ) : (
+        <> {routes} </>
+      )}
+    </div>
   );
 }
 
-export default App;
+export default withRouter(App);
