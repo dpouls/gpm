@@ -1,12 +1,14 @@
 import React from 'react';
-import logo from './logo.svg';
 import './App.css';
+import Header from './Components/Header/Header'
+import routes from './routes'
 
 function App() {
   return (
     <div className="App">
-
-    </div>
+      <Header/>
+      {routes}
+      </div>
   );
 }
 

@@ -1,11 +1,11 @@
 import React from 'react'
 
-const Header = (props) => {
+const Portal = (props) => {
     return (
         <div>
-            header
+            portal
         </div>
     )
 }
 
-export default Header
+export default Portal
