@@ -5,3 +5,16 @@ $black: #050504;
 $darkGrey: #1f1f1f;
 $grey: #bbada9;
 $white: white;
+
+
+
+$theme-colors: (
+    "darkYellow": $darkYellow,
+    "lightYellow": $lightYellow,
+    "black": $black,
+    "darkGrey": $darkGrey,
+    "grey": $grey,
+    "white": $white
+    );
+    
+@import "node_modules/bootstrap/scss/bootstrap";

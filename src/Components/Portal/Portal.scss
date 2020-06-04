@@ -2,15 +2,60 @@
 
 .portal-page-container {
     min-height: 100vh;
+    box-sizing: border-box;
     width: 100%;
     background: linear-gradient(45deg, $darkYellow, $lightYellow);
     padding-top: 50px;
     display: flex;
-    justify-content: center;
+    flex-direction: column;
+    align-items: center;
     .user-info-box {
         width: 90%;
         height: 300px;
         background-color: $white;
         border-radius: 10px;
+        font-family: Montserrat, sans-serif;
+        font-size: 15pt;
+        box-sizing: border-box;
+        padding: 10px;
+    }
+    button {
+        border: none;
+        box-sizing: border-box;
+        border-radius: 10px;
+        padding: 10px;
+        width: 90vw;
+        margin: 10px 0px;
+        background-color: $darkGrey;
+        color: $white;
+        &:focus {
+            outline: none;
+        }
+    }
+    #property-thumbnail {
+        width: 90%;
+        border-radius: 10px;
+        box-sizing: border-box;
+
+
+    }
+    .property-info-container {
+        width: 90%;
+        height: 200px;
+        border-radius: 10px;
+        background-color: $white;
+        display: flex;
+        flex-direction: column;
+        margin-top: 10px;
+        box-sizing: border-box;
+        padding: 10px 20px;
+    }
+    #property-info-title {
+        font-family: Montserrat, sans-serif;
+        font-size: 15pt;
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        margin-bottom: 10px;
     }
 }

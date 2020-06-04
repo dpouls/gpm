@@ -7,7 +7,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
-
+    box-sizing: border-box;
 }
 
 .login-modal-container {
@@ -28,6 +28,7 @@
     form {
         display: flex;
         flex-direction: column;
+        
     }
     input {
         font-family: 'Roboto', sans-serif;

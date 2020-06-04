@@ -1,13 +1,17 @@
 import React from "react";
 import "./Header.scss";
+import ingot from "../../assets/ingot.jpg";
+import Axios from "axios";
+import {withRouter} from 'react-router-dom'
 
 const Header = (props) => {
   return (
     <div className="header-container">
-      <div>GOLDEN</div>
-      <i class="fas fa-bars"></i>
+      <img id="ingot" src={ingot} alt="" />
+      <p>GOLDEN</p>
+      <i onClick={() => { Axios.post('/auth/logout');  props.history.push('/login')}} class="fas fa-bars"></i>
     </div>
   );
 };
 
-export default Header;
+export default withRouter(Header);
