@@ -4,12 +4,12 @@
     min-height: 100vh;
     box-sizing: border-box;
     width: 100%;
-    background: linear-gradient(45deg, $darkYellow, $lightYellow);
+    // background: linear-gradient(45deg, $darkYellow, $lightYellow);
     padding-top: 50px;
     display: flex;
     flex-direction: column;
     align-items: center;
-    .user-info-box {
+    .user-info-container {
         width: 90%;
         height: 300px;
         background-color: $white;
@@ -46,6 +46,7 @@
         background-color: $white;
         display: flex;
         flex-direction: column;
+        justify-content: space-evenly;
         margin-top: 10px;
         box-sizing: border-box;
         padding: 10px 20px;

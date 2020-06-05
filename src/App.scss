@@ -1,5 +1,9 @@
+@import './sass/variables.scss';
+
 .App {
   font-family: 'Roboto', sans-serif;
   position: relative;
   box-sizing: border-box;
+  background: linear-gradient(45deg, $darkYellow, $lightYellow);
+  min-height: 100vh;
 }

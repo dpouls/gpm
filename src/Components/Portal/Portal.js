@@ -32,7 +32,7 @@ const Portal = (props) => {
         />
       ) : (
         <>
-          <div className="user-info-box">
+          <div className="user-info-container">
             <p>Hello {currentUser.first_name}!</p>
             <div>
               Total rent due: $
@@ -43,7 +43,7 @@ const Portal = (props) => {
             <p>Due on: 17th</p>
           </div>
 
-          <button>PAY MY RENT</button>
+          <button onClick={() => props.history.push('/pay')}>PAY MY RENT</button>
 
           <button onClick={() => console.log(currentUser)}>
             SUBMIT MAINTENANCE REQUEST

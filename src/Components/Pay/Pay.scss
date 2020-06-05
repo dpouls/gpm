@@ -1,0 +1,30 @@
+@import '../../sass/variables.scss';
+
+.pay-page-container {
+    box-sizing: border-box;
+    padding-top: 50px;
+    display: flex;
+    flex-direction: column;
+    // justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+}
+
+.pay-buttons-container {
+    display: flex;
+    flex-direction: column;
+    // justify-content: center;
+    width: 90%;
+    button {
+        border: none;
+        border-radius: 10px;
+        margin: 5px 0px;
+        background-color: $darkGrey;
+        color: $white;
+        box-sizing: border-box;
+        padding: 10px;
+        &:focus {
+            outline: none;
+        }
+    }
+}
