@@ -6,7 +6,7 @@ const express = require('express'),
       uc = require('./controllers/userController'),
       app = express();
 
-const {SERVER_PORT, CONNECTION_STRING,SESSION_SECRET} = process.env
+const {SERVER_PORT, CONNECTION_STRING, SESSION_SECRET} = process.env
 
 app.use(express.json())
 
@@ -16,11 +16,13 @@ app.use(session({
     secret: SESSION_SECRET,
     cookie: {maxAge: 1000 * 60 * 60}
 }))
-
-massive(CONNECTION_STRING).then(db => {
-    app.set('db',db)
-    console.log('db connected')
+massive({
+    connectionString: process.env.CONNECTION_STRING,
+    ssl: {rejectUnauthorized: false}
+}).then(db => {
+    app.set('db', db)
 })
+
 
 //AUTH ENDPOINTS 
 app.post('/auth/login', ac.login)
