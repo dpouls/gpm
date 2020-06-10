@@ -2,9 +2,9 @@ import React, { useState, useEffect } from "react";
 import "./Pay.scss";
 import { loadStripe } from "@stripe/stripe-js";
 import Spinner from "react-bootstrap/Spinner";
-import swal from 'sweetalert';
-import { withRouter } from 'react-router-dom'
-
+import swal from "sweetalert";
+import { withRouter } from "react-router-dom";
+import Axios from "axios";
 import {
   Elements,
   CardElement,
@@ -18,7 +18,7 @@ const CardForm = (props) => {
   const stripe = useStripe();
   const elements = useElements();
 
-  console.log('cardform',props)
+  console.log("cardform", props);
 
   const processCardPayment = async (e) => {
     e.preventDefault();
@@ -33,10 +33,11 @@ const CardForm = (props) => {
         const { data } = await axios
           .post("/api/charge", {
             id,
-            amount: 100000,
+            amount: props.rentDue * 100,
           })
           .then((res) => {
-            props.PayProps.history.push('/')
+            console.log(res)
+            props.PayProps.history.push("/");
             swal("Success", "Your payment was completed!", "success");
           });
         console.log(data);
@@ -83,11 +84,36 @@ const stripePromise = loadStripe(process.env.REACT_APP_STRIPE_PUBLISHABLE_KEY);
 const Pay = (props) => {
   const [card, toggleCard] = useState(false);
   const [bank, toggleBank] = useState(false);
-  console.log('payprops',props)
+
+  const [currentUser, setCurrentUser] = useState({});
+  const [rentDue, setRentDue] = useState(0)
+  const [loading, setLoading] = useState(false);
+
+  useEffect(() => {
+    getUserInfo()
+  },[])
+  const getUserInfo = async () => {
+    setLoading(true);
+    Axios.get("/api/user")
+      .then((res) => {
+        console.log(res.data);
+        setCurrentUser(res.data);
+
+        if(res.data.pet){
+          let rentWithPetFee = parseInt(res.data.rental_price) + 50
+          console.log(rentWithPetFee)
+          setRentDue(rentWithPetFee)
+        } 
+        
+        setLoading(false);
+      })
+      .catch((err) => props.history.push("/login"));
+  };
+  console.log("payprops", props);
   return (
     <div className="pay-page-container">
       <div>
-        <p>Total rent due: </p>
+  <p>Total rent due: ${rentDue}</p>
       </div>
       <div className="pay-buttons-container">
         <button
@@ -99,7 +125,7 @@ const Pay = (props) => {
         </button>
         {card ? (
           <Elements stripe={stripePromise}>
-            <CardForm PayProps={props} toggleCard={toggleCard} card={card} />
+            <CardForm PayProps={props} rentDue={rentDue} toggleCard={toggleCard} card={card} />
           </Elements>
         ) : null}
         <button onClick={() => toggleBank(!bank)}>
