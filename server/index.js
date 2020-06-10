@@ -3,6 +3,7 @@ const express = require('express'),
       massive = require('massive'),
       session = require('express-session'),
       ac = require('./controllers/authController'),
+      pc = require('./controllers/paymentController'),
       uc = require('./controllers/userController'),
       app = express();
 
@@ -17,10 +18,11 @@ app.use(session({
     cookie: {maxAge: 1000 * 60 * 60}
 }))
 massive({
-    connectionString: process.env.CONNECTION_STRING,
+    connectionString: CONNECTION_STRING,
     ssl: {rejectUnauthorized: false}
 }).then(db => {
     app.set('db', db)
+    console.log('db connected')
 })
 
 
@@ -32,6 +34,9 @@ app.get('/auth/currentuser')
 
 //User Endpoints
 app.get('/api/user', uc.getUserInfo)
+
+//Payment Endpoints
+app.post('/api/charge', pc.processPayment)
 
 
 app.listen(SERVER_PORT, () => console.log(`Server running on port ${SERVER_PORT}`))

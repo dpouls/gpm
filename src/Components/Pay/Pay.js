@@ -1,6 +1,9 @@
 import React, { useState, useEffect } from "react";
 import "./Pay.scss";
 import { loadStripe } from "@stripe/stripe-js";
+import Spinner from "react-bootstrap/Spinner";
+import swal from 'sweetalert';
+import { withRouter } from 'react-router-dom'
 
 import {
   Elements,
@@ -10,10 +13,14 @@ import {
 } from "@stripe/react-stripe-js";
 import axios from "axios";
 
-const CardForm = () => {
+const CardForm = (props) => {
+  const [processing, toggleProcessing] = useState(false);
   const stripe = useStripe();
   const elements = useElements();
-  const processPayment = async (e) => {
+
+  console.log('cardform',props)
+
+  const processCardPayment = async (e) => {
     e.preventDefault();
     const { error, paymentMethod } = await stripe.createPaymentMethod({
       type: "card",
@@ -23,10 +30,15 @@ const CardForm = () => {
       const { id } = paymentMethod;
       console.log(paymentMethod);
       try {
-        const { data } = await axios.post("/api/charge", {
-          id,
-          amount: 100000,
-        });
+        const { data } = await axios
+          .post("/api/charge", {
+            id,
+            amount: 100000,
+          })
+          .then((res) => {
+            props.PayProps.history.push('/')
+            swal("Success", "Your payment was completed!", "success");
+          });
         console.log(data);
       } catch (error) {
         console.log(error);
@@ -35,12 +47,33 @@ const CardForm = () => {
   };
 
   return (
-    <form onSubmit={processPayment} style={{ width: "100%" }}>
-      <CardElement />
-      <button type="submit" disabled={!stripe}>
-        Pay
-      </button>
-    </form>
+    <>
+      {processing ? (
+        <Spinner
+          animation="border"
+          variant="black"
+          style={{ height: "300px", width: "300px" }}
+        />
+      ) : (
+        <form
+          className="card_form"
+          onSubmit={(e) => {
+            // props.toggleCard(false)
+            processCardPayment(e);
+            // toggleProcessing(true);
+          }}
+        >
+          <CardElement className="card_element" />
+          <button
+            id="pay_button"
+            type="submit"
+            disabled={processing || !stripe}
+          >
+            Pay
+          </button>
+        </form>
+      )}
+    </>
   );
 };
 
@@ -50,27 +83,26 @@ const stripePromise = loadStripe(process.env.REACT_APP_STRIPE_PUBLISHABLE_KEY);
 const Pay = (props) => {
   const [card, toggleCard] = useState(false);
   const [bank, toggleBank] = useState(false);
-
+  console.log('payprops',props)
   return (
     <div className="pay-page-container">
       <div>
         <p>Total rent due: </p>
       </div>
       <div className="pay-buttons-container">
-        <button onClick={() => toggleCard(!card)}>
+        <button
+          onClick={() => {
+            toggleCard(!card);
+          }}
+        >
           I want to pay with card
         </button>
         {card ? (
           <Elements stripe={stripePromise}>
-            <CardForm />
+            <CardForm PayProps={props} toggleCard={toggleCard} card={card} />
           </Elements>
         ) : null}
-        {/* <button onClick={() => toggleBank(!bank)}> */}
-        <button
-          onClick={() =>
-            console.log(process.env.REACT_APP_STRIPE_PUBLISHABLE_KEY)
-          }
-        >
+        <button onClick={() => toggleBank(!bank)}>
           I want to pay with my bank account
         </button>
         {bank ? <div>bank info goes here</div> : null}
@@ -79,4 +111,4 @@ const Pay = (props) => {
   );
 };
 
-export default Pay;
+export default withRouter(Pay);

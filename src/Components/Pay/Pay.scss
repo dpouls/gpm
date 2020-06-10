@@ -28,3 +28,18 @@
         }
     }
 }
+
+.card_form {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+}
+.card_element {
+    background-color: $white;
+    padding: 5px;
+    border-radius: 5px;
+}
+
+#pay_button {
+    background-color: rgb(47, 163, 47);
+}
