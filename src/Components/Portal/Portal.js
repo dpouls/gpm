@@ -2,7 +2,6 @@ import React, { useEffect } from "react";
 import Axios from "axios";
 import { useState } from "react";
 import Spinner from "react-bootstrap/Spinner";
-import Pay from '../Pay/Pay'
 // import Button from "react-bootstrap/Button";
 import "./Portal.scss";
 
@@ -46,7 +45,7 @@ const Portal = (props) => {
 
           <button onClick={() => props.history.push('/pay')}>PAY MY RENT</button>
 
-          <button onClick={() => console.log(currentUser)}>
+          <button onClick={() => props.history.push('/request')}>
             SUBMIT MAINTENANCE REQUEST
           </button>
 

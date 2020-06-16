@@ -5,6 +5,7 @@ const express = require('express'),
       ac = require('./controllers/authController'),
       pc = require('./controllers/paymentController'),
       uc = require('./controllers/userController'),
+      rc = require('./controllers/requestController'),
       app = express();
 
 const {SERVER_PORT, CONNECTION_STRING, SESSION_SECRET} = process.env
@@ -38,5 +39,7 @@ app.get('/api/user', uc.getUserInfo)
 //Payment Endpoints
 app.post('/api/charge', pc.processPayment)
 
+//Maintenance Request Endpoints
+app.post('/api/request', rc.createRequest)
 
 app.listen(SERVER_PORT, () => console.log(`Server running on port ${SERVER_PORT}`))
