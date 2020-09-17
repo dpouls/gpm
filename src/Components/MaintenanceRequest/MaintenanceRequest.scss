@@ -1,0 +1,26 @@
+@import '../../sass/variables.scss';
+#request-form {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    box-sizing: border-box;
+    width: 100vw;
+    padding: 0 10px;
+    // background-color: red;
+}
+#option-list {
+    width: 100%;
+    box-sizing: border-box;
+    padding: 5px;
+    display: inline-grid;
+    grid-template-columns: repeat(3,1fr);
+    grid-gap: 10px;
+}
+
+#selected-button {
+    background-color: red;
+}
+
+.grid-button {
+
+}

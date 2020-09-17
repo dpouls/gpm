@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import './MaintenanceRequest.scss'
 import {
   Form,
   Button,
@@ -22,7 +23,11 @@ const MaintenanceRequest = () => {
     "electrical",
     "other",
   ];
+  /// WORKING ON MAKING SELECTED BUTTONS TURN ANOTHER COLOR>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
   const [emergency, toggleEmergency] = useState(false);
+  const [requestType, setRequestType] = useState([])
+  const [selectedButton, setSelectedButton] = useState('selected-button')
+  const [unselectedButton, setUnselectedButton] = useState('')
   const optionToggler = (option) => {
     switch (option) {
       case "emergency":
@@ -30,28 +35,33 @@ const MaintenanceRequest = () => {
         console.log(emergency);
         break;
         default:
-            console.log('default')
+            requestType.push(option)
+            console.log( requestType)
     }
   };
   return (
     <div>
-      <Form>
+      <Form id='request-form'>
+        <section id='option-list'>
         {options.map((option) => {
           let capitalized = option.charAt(0).toUpperCase() + option.slice(1);
-          return <button onClick={() => optionToggler(option)}>{capitalized}</button>;
+          return <Button id={{unselectedButton}} variant='light' onClick={() => optionToggler(option)}>{capitalized}</Button>;
         })}
-        <Form.Group controlId="formBasicEmail">
+
+        </section>
+        <Form.Group >
           <Form.Label>Please explain your request in detail:</Form.Label>
-          <Form.Control type="email" placeholder="Explain here" />
-          <Form.Text className="text-muted">
-            We'll never share your email with anyone else.
+          <Form.Control as='textarea' rows='3' placeholder="Explain here" />
+        </Form.Group>
+        <Form.Group >
+          <Form.Text>
+            Please upload a picture of the problem if necessary.
           </Form.Text>
-        </Form.Group>
-        <Form.Group controlId="formBasicPassword">
           <Form.File />
-          <Form.Control type="password" placeholder="Password" />
+          <Form.Control placeholder="Phone Number" />
+          <Form.Control placeholder="Email" />
         </Form.Group>
-        <Button variant="Light" type="submit">
+        <Button variant="light" type="submit">
           Submit
         </Button>
       </Form>
