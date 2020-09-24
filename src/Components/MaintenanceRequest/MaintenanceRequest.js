@@ -16,7 +16,7 @@ const MaintenanceRequest = () => {
     "bedroom",
     "yard",
     "kitchen",
-    "living_room",
+    "living room",
     "exterior",
     "appliance",
     "plumbing",
@@ -25,17 +25,26 @@ const MaintenanceRequest = () => {
   ];
   /// WORKING ON MAKING SELECTED BUTTONS TURN ANOTHER COLOR>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
   const [emergency, toggleEmergency] = useState(false);
-  const [requestType, setRequestType] = useState([])
-  const [selectedButton, setSelectedButton] = useState('selected-button')
-  const [unselectedButton, setUnselectedButton] = useState('')
+  const [requestType, setRequestType] = useState([]);
+  // const [btnStyleId, setBtnStyleId] = useState('')
+  const [selectedOption, setSelectedOption] = useState({})
+
   const optionToggler = (option) => {
     switch (option) {
       case "emergency":
         toggleEmergency(!emergency)
+
         console.log(emergency);
         break;
         default:
-            requestType.push(option)
+            if(!requestType.includes(option)){
+
+              requestType.push(option)
+            } else {
+              let optionIndex = requestType.findIndex((element) => element === option)
+              console.log('optionindex:', optionIndex)
+              requestType.splice(optionIndex,1)
+            }
             console.log( requestType)
     }
   };
@@ -45,7 +54,15 @@ const MaintenanceRequest = () => {
         <section id='option-list'>
         {options.map((option) => {
           let capitalized = option.charAt(0).toUpperCase() + option.slice(1);
-          return <Button id={{unselectedButton}} variant='light' onClick={() => optionToggler(option)}>{capitalized}</Button>;
+          return <Button 
+              id={requestType.includes(option) ? 'selected-button' : ''
+            }
+              variant='light'
+              onClick={() => {
+              setSelectedOption(option)
+              console.log(selectedOption)
+              // setBtnStyleId('selected-button')
+              optionToggler(option)}}>{capitalized}</Button>;
         })}
 
         </section>

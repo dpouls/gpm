@@ -6,21 +6,28 @@
     box-sizing: border-box;
     width: 100vw;
     padding: 0 10px;
-    // background-color: red;
 }
 #option-list {
     width: 100%;
     box-sizing: border-box;
     padding: 5px;
     display: inline-grid;
-    grid-template-columns: repeat(3,1fr);
+    grid-template-columns: repeat(2,1fr);
     grid-gap: 10px;
 }
 
+// emergency
+// bathroom
+// bedroom,
+// yard
+// kitchen
+// living_room
+// exterior
+// appliance
+// plumbing
+// electrical
+// other
 #selected-button {
     background-color: red;
 }
 
-.grid-button {
-
-}
