@@ -5,29 +5,46 @@
     justify-content: space-evenly;
     box-sizing: border-box;
     width: 100vw;
-    padding: 0 10px;
+    padding: 0 20px;
 }
-#option-list {
+#problem-areas-list {
     width: 100%;
     box-sizing: border-box;
-    padding: 5px;
+    // padding: 5px;
     display: inline-grid;
     grid-template-columns: repeat(2,1fr);
     grid-gap: 10px;
 }
 
-// emergency
-// bathroom
-// bedroom,
-// yard
-// kitchen
-// living_room
-// exterior
-// appliance
-// plumbing
-// electrical
-// other
+
 #selected-button {
+    background-color: rgb(165, 165, 165);
+    outline: none;
+    &:focus {
+        outline: none;
+        box-shadow: none;
+    }
+}
+
+#emergency-button {
     background-color: red;
 }
 
+.request-text-prompts {
+    font-size: large;
+}
+.emergency-button {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    box-sizing: border-box;
+    padding:  10px 0;
+    // justify-content: center;
+    // align-items: center;
+    button {
+        margin-top: 15px;
+        width: 100%;
+    } 
+
+
+}
