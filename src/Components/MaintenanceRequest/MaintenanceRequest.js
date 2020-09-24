@@ -1,5 +1,8 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import { withRouter } from "react-router-dom";
 import './MaintenanceRequest.scss'
+import swal from "sweetalert";
+
 import {
   Form,
   Button,
@@ -10,7 +13,7 @@ import {
 } from "react-bootstrap";
 import Axios from "axios";
 
-const MaintenanceRequest = () => {
+const MaintenanceRequest = (props) => {
   const problemAreas = [
     "bathroom",
     "bedroom",
@@ -29,8 +32,18 @@ const MaintenanceRequest = () => {
   const [requestDetails, setRequestDetails] = useState('')
   const [phoneNumber, setPhoneNumber] = useState('')
   const [email, setEmail] = useState('')
+  const [userInfo, setUserInfo] = useState({})
+  useEffect(() => {
+    getUserInfo()
+    }
+  , []);
 
-  
+  const getUserInfo = () => {
+    Axios.get('/api/user').then((res) => {
+      console.log(res.data)
+      setUserInfo(res.data)
+    })
+  }
   const problemAreaToggler = (problemArea) => {
             if(!problemAreaArray.includes(problemArea)){
               problemAreaArray.push(problemArea)
@@ -45,14 +58,22 @@ const MaintenanceRequest = () => {
   console.log('rD',requestDetails)
   console.log('pN',phoneNumber)
   console.log('email',email)
-  const submitRequest = () => {
-    Axios.post('/a;i/request', problemAreaArray, emergency, requestDetails, phoneNumber, email).then((res) => console.log(res.data))
+  const submitRequest = (e) => {
+    e.preventDefault();
+    let property_id = userInfo.property_id;
+    Axios.post('/api/request', {property_id, problemAreaArray, emergency, requestDetails, phoneNumber, email}).then((res) => {
+      swal("Success", "Your request was submitted!", "success")
+      props.history.push('/portal')
+    })
   }
 
   
   return (
     <div>
-      <Form id='request-form'>
+      <Form onSubmit={(e) => submitRequest(e)} id='request-form'>
+        <section>
+          <Form.Text className='request-text-prompts'>For: {userInfo.street_address ? `${userInfo.street_address}, ${userInfo.city}, ${userInfo.state}` : null}</Form.Text>
+        </section>
         <section
           className='emergency-button'
           >
@@ -98,7 +119,7 @@ const MaintenanceRequest = () => {
           <Form.Control onChange={(e) => setPhoneNumber(e.target.value)} placeholder="Phone Number" />
           <Form.Control onChange={(e) => setEmail(e.target.value)} placeholder="Email" />
         </Form.Group>
-        <Button variant="light" type="submit">
+        <Button variant="light" type="submit" >
           Submit
         </Button>
       </Form>
@@ -106,4 +127,4 @@ const MaintenanceRequest = () => {
   );
 };
 
-export default MaintenanceRequest;
+export default withRouter(MaintenanceRequest);

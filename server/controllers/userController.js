@@ -6,8 +6,6 @@ module.exports = {
             .then(userInfo => { 
                 res.status(200).send(userInfo[0])
             }).catch(err => res.status(500).send(err))
-
-            // res.status(200).send(req.session.user)
         } else {
             res.sendStatus(404)
         }
