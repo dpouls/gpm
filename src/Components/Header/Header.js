@@ -21,12 +21,20 @@ const Header = (props) => {
 
   },[])
     useEffect(() => {
-      if(userInfo.isadmin){
+      if(!userInfo.renter_id){
         setNavigationLinks(["Home",
-        "Portal",
-        "Admin",
-        "Log out"])
+          "Log in"])
       }
+        else {
+          if(userInfo.isadmin){
+            setNavigationLinks(["Home",
+            "Portal",
+            "Admin",
+            "Log out"])
+            
+        }
+      }
+      
       console.log('userinfo check')
     }, [userInfo])
 
@@ -47,9 +55,12 @@ const Header = (props) => {
               else if(navLink === 'Log out'){
                   Axios.post('/auth/logout').then(() => props.history.push('/'))
                 }
-              else {
+              else if(navLink === 'Log in') {
+                props.history.push('/login')
+              } else {
                 props.history.push(navLink)
               }
+              toggleMenuClicked(!menuClicked)
             }}>{navLink}</section>;
           })}
         </section>

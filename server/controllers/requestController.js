@@ -136,7 +136,8 @@ module.exports = {
             other = false,
             image_one = '',
             image_two = '',
-            image_three = '';
+            image_three = '',
+            is_complete = false;
 
             console.log('reqbody', req.body)
             let problemAreas = [
@@ -215,7 +216,8 @@ module.exports = {
                 image_two,
                 image_three,
                 phone_number,
-                email
+                email,
+                is_complete
             ])
             .then(request => { 
                 console.log('res',res)

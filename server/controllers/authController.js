@@ -47,6 +47,7 @@ module.exports = {
     logout: (req, res) => {
         req.session.destroy();
         res.sendStatus(200);
+        console.log('Logged out')
     },
     currentUser: (req,res) => {
         console.log('currentuser hit')
