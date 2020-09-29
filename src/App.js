@@ -3,6 +3,7 @@ import "./App.scss";
 import Header from "./Components/Header/Header";
 import routes from "./routes";
 import { withRouter } from "react-router-dom";
+import Navbar from './Components/NavBar/NavBar'
 
 function App(props) {
   return (
