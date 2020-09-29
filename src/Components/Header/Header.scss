@@ -6,8 +6,10 @@
     box-sizing: border-box;
     padding: 0px 5%;
     display: flex;
-    justify-content: space-between;
-    align-items: center;
+    flex-direction: column;
+    // justify-content: flex-end;
+
+    align-items: flex-end;
     height: 50px;
     width: 100vw;
     font-size: 15pt;
@@ -15,8 +17,13 @@
         padding: 0;
         margin: 0;
     }
-    #ingot {
-        height: 20px;
-    }
+
 }
 
+.nav-links-container {
+    display: flex;
+    flex-direction: column;
+    font-size: 15pt;
+    background: linear-gradient(45deg, $darkYellow, $lightYellow);
+    width: 100%;
+}
