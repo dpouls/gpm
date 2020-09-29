@@ -1,0 +1,31 @@
+@import '../../sass/variables.scss';
+
+.admin-portal {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    button {
+        border: none;
+        box-sizing: border-box;
+        border-radius: 10px;
+        padding: 10px;
+        width: 90vw;
+        margin: 10px 0px;
+        background-color: $darkGrey;
+        color: $white;
+        &:focus {
+            outline: none;
+        }
+    }
+}
+.sub-button-container {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+#sub-button {
+    background-color: $grey;
+}

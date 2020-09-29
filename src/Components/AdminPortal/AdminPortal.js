@@ -13,20 +13,62 @@ const AdminPortal = (props) => {
         }
     })
     },[])
+    const [rentersClicked,toggleRentersClicked] = useState(false);
+    const [propertiesClicked,togglePropertiesClicked] = useState(false);
+    const [paymentsClicked, togglePaymentsClicked] = useState(false);
+    const [maintenanceRequestsClicked,toggleMaintenanceRequestsClicked] = useState(false)
+
     return (
-        <div>
-            <section>
+        <div className='admin-portal'>
+            <button onClick={() => toggleRentersClicked(!rentersClicked)}>
                 Renters
-            </section>
-            <section>
+            </button>
+            {rentersClicked ? (
+                <div className='sub-button-container'>
+
+                <button id="sub-button">See Current Renters</button>
+                <button id="sub-button">Add a New Renter</button>
+                </div>
+            ):
+            (
+                null
+            )}
+            <button onClick={() => togglePropertiesClicked(!propertiesClicked)}>
                 Properties
-            </section>
-            <section>
+            </button>
+            {propertiesClicked ? (
+                <div className='sub-button-container'>
+
+                <button id="sub-button">See Current Properties</button>
+                <button id="sub-button">Add a New Property</button>
+                </div>
+            ):
+            (
+                null
+            )}
+            <button onClick={() => togglePaymentsClicked(!paymentsClicked)}>
                 Payments
-            </section>
-            <section>
+            </button>
+            {paymentsClicked ? (
+                <div className='sub-button-container'>
+                <button id="sub-button">See All Payments</button>
+                </div>
+            ):
+            (
+                null
+            )}
+            <button onClick={() => toggleMaintenanceRequestsClicked(!maintenanceRequestsClicked)}>
                 Maintenance Requests
-            </section>
+            </button>
+            {maintenanceRequestsClicked ? (
+                <div className='sub-button-container'>
+
+                <button id="sub-button">See Current Maintenance Requests</button>
+                </div>
+            ):
+            (
+                null
+            )}
         </div>
     )
 }
