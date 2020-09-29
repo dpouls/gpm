@@ -10,18 +10,47 @@ const Header = (props) => {
   const [navigationLinks, setNavigationLinks] = useState([
     "Home",
     "Portal",
-    "Admin",
+    "Log out"
   ]);
+  const [userInfo, setUserInfo] = useState({})
+   useEffect( () => {
+     Axios.get('/api/user').then(res => {
+      setUserInfo(res.data)
+    })
+
+
+  },[])
+    useEffect(() => {
+      if(userInfo.isadmin){
+        setNavigationLinks(["Home",
+        "Portal",
+        "Admin",
+        "Log out"])
+      }
+      console.log('userinfo check')
+    }, [userInfo])
+
   return (
+    <div className='header-nav-links-container'>
     <div className="header-container">
       <i
         onClick={() => toggleMenuClicked(!menuClicked)}
         className="fas fa-bars"
       ></i>
-      {menuClicked ? (
+      
+    </div>
+    {menuClicked ? (
         <section className='nav-links-container'>
           {navigationLinks.map((navLink) => {
-            return <section>{navLink}</section>;
+            return <section onClick={() => {
+              if(navLink === 'Home'){props.history.push('/')}
+              else if(navLink === 'Log out'){
+                  Axios.post('/auth/logout').then(() => props.history.push('/'))
+                }
+              else {
+                props.history.push(navLink)
+              }
+            }}>{navLink}</section>;
           })}
         </section>
       ) : null}
