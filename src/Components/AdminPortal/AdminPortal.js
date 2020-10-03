@@ -2,6 +2,7 @@ import Axios from "axios";
 import React, { useState, useEffect } from "react";
 import { withRouter } from "react-router-dom";
 import "./AdminPortal.scss";
+import Form from 'react-bootstrap/Form'
 
 const AdminPortal = (props) => {
   useEffect(() => {
@@ -61,10 +62,15 @@ const AdminPortal = (props) => {
               <input name="password" type="password" />
               <label for="occupants">Occupants</label>
               <input name="occupants" type="number" />
-              <label className="container">
-                Admin:
-                <input type="checkbox" />
-              </label>
+
+              <label for='adminCheckbox'>Admin:</label>
+              {/* lots of problems with checkboxes */}
+      <Form.Check 
+        custom
+        type={'checkbox'}
+        label={`Admin?`}
+      />
+              <input name='adminCheckbox' type="checkbox" />
             </form>
           ) : null}
         </div>
