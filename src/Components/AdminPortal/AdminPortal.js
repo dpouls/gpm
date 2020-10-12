@@ -2,7 +2,9 @@ import Axios from "axios";
 import React, { useState, useEffect } from "react";
 import { withRouter } from "react-router-dom";
 import "./AdminPortal.scss";
-import Form from 'react-bootstrap/Form'
+import Form from "react-bootstrap/Form";
+import NewRenter from "./NewRenter/NewRenter";
+import swal from "sweetalert";
 
 const AdminPortal = (props) => {
   useEffect(() => {
@@ -15,6 +17,7 @@ const AdminPortal = (props) => {
   }, []);
   const [rentersClicked, toggleRentersClicked] = useState(true);
   const [newRenterClicked, toggleNRClicked] = useState(true);
+  const [adminChecked, toggleAdminChecked] = useState(false);
   const [newRenterForm, setNewRenterForm] = useState({
     firstName: "",
     lastName: "",
@@ -23,13 +26,18 @@ const AdminPortal = (props) => {
     username: "",
     password: "",
     occupants: "",
-    isadmin: false
+    isadmin: false,
   });
+  useEffect(() => {
+    console.log(newRenterForm);
+  }, [newRenterForm]);
 
   const [propertiesClicked, togglePropertiesClicked] = useState(false);
   const [paymentsClicked, togglePaymentsClicked] = useState(false);
   const [mRClicked, toggleMRClicked] = useState(false);
-
+  const inputHandler = (e) => {
+    setNewRenterForm({ ...newRenterForm, [e.target.name]: e.target.value });
+  };
   return (
     <div className="admin-portal">
       <button onClick={() => toggleRentersClicked(!rentersClicked)}>
@@ -47,30 +55,67 @@ const AdminPortal = (props) => {
             </button>
           </div>
           {newRenterClicked ? (
+            //seperate component but i wanna make sure i update it correctly
+            // <NewRenter setNewRenterFormFn={setNewRenterForm}/>
             <form className="new-renter-form">
               <label for="firstName">First Name</label>
-              <input name="firstName" type="text" />
+              <input name="firstName" type="text" onChange={inputHandler} />
               <label for="lastName">Last Name</label>
-              <input name="firstName" type="text" />
+              <input name="lastName" type="text" onChange={inputHandler} />
               <label for="email">Email</label>
-              <input name="email" type="email" />
+              <input name="email" type="email" onChange={inputHandler} />
               <label for="phoneNumber">Phone Number</label>
-              <input name="phoneNumber" type="text" />
+              <input name="phoneNumber" type="text" onChange={inputHandler} />
               <label for="username">Username</label>
-              <input name="username" type="text" />
+              <input name="username" type="text" onChange={inputHandler} />
               <label for="password">Password</label>
-              <input name="password" type="password" />
+              <input name="password" type="password" onChange={inputHandler} />
               <label for="occupants">Occupants</label>
-              <input name="occupants" type="number" />
+              <input name="occupants" type="number" onChange={inputHandler} />
 
-              <label for='adminCheckbox'>Admin:</label>
-              {/* lots of problems with checkboxes */}
-      <Form.Check 
-        custom
-        type={'checkbox'}
-        label={`Admin?`}
-      />
-              <input name='adminCheckbox' type="checkbox" />
+              <label className="admin-checkbox-container" for="adminCheckbox">
+                Admin:{" "}
+                {adminChecked ? (
+                  <>
+                    <button
+                      name="adminCheckbox"
+                      id="admin-button-checked"
+                      onClick={() => toggleAdminChecked(!adminChecked)}
+                    >
+                      Yes
+                    </button>
+                    <span>
+                      Click if you wish to remove admin controls from this user.
+                    </span>
+                  </>
+                ) : (
+                  <>
+                    <button
+                      name="adminCheckbox"
+                      id="admin-button-not-checked"
+                      onClick={() => { 
+                        swal({
+                            title: "Warning!",
+                            text:"Checking this box will alow this user admin access!", 
+                            icon: "warning", 
+                            buttons: true, 
+                            dangerMode: true})
+                            .then((okay) => {
+                              if(okay) {
+                                toggleAdminChecked(!adminChecked)
+                              } else {
+                                swal("This user was not marked as an admin.")
+                              }
+                            })}}>
+                    
+                      No
+                    </button>
+                    <span>
+                      Click if you wish to give this user admin controls.
+                    </span>
+                  </>
+                )}
+              </label>
             </form>
           ) : null}
         </div>

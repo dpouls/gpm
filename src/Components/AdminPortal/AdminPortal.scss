@@ -30,6 +30,7 @@
     background-color: $grey;
 }
 
+
 .new-renter-form {
     width: 100%;
     display: flex;
@@ -43,5 +44,21 @@
         font-size: large;
     }
 }
-
   
+#admin-button-checked {
+    width: 50px;
+    margin: 10px;
+    background-color: green;
+}
+#admin-button-not-checked {
+    width: 50px;
+    margin: 10px;
+}
+
+.admin-checkbox-container {
+
+    display: flex;
+    align-content: center;
+    align-items: center;
+    
+}
