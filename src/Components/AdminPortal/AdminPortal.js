@@ -29,12 +29,26 @@ const AdminPortal = (props) => {
     isadmin: false,
   });
   useEffect(() => {
+    generateUsername();
+    console.log(generatedUsername);
     console.log(newRenterForm);
   }, [newRenterForm]);
 
   const [propertiesClicked, togglePropertiesClicked] = useState(false);
   const [paymentsClicked, togglePaymentsClicked] = useState(false);
   const [mRClicked, toggleMRClicked] = useState(false);
+  const [generatedUsername, setGeneratedUsername] = useState("");
+  const generateUsername = () => {
+    if (newRenterForm.phoneNumber.length > 0) {
+      let lastFour = /[0-9]{4}$/;
+      let lastFourPhone = lastFour.exec(newRenterForm.phoneNumber);
+      setGeneratedUsername(
+        newRenterForm.firstName + newRenterForm.lastName + lastFourPhone
+      );
+      console.log("generateusername fired");
+    }
+    console.log("generate username didnt fire yet");
+  };
   const inputHandler = (e) => {
     setNewRenterForm({ ...newRenterForm, [e.target.name]: e.target.value });
   };
@@ -67,7 +81,12 @@ const AdminPortal = (props) => {
               <label for="phoneNumber">Phone Number</label>
               <input name="phoneNumber" type="text" onChange={inputHandler} />
               <label for="username">Username</label>
-              <input name="username" type="text" onChange={inputHandler} />
+              <input
+                value={generatedUsername}
+                name="username"
+                type="text"
+                onChange={inputHandler}
+              />
               <label for="password">Password</label>
               <input name="password" type="password" onChange={inputHandler} />
               <label for="occupants">Occupants</label>
@@ -93,21 +112,23 @@ const AdminPortal = (props) => {
                     <button
                       name="adminCheckbox"
                       id="admin-button-not-checked"
-                      onClick={() => { 
+                      onClick={() => {
                         swal({
-                            title: "Warning!",
-                            text:"Checking this box will alow this user admin access!", 
-                            icon: "warning", 
-                            buttons: true, 
-                            dangerMode: true})
-                            .then((okay) => {
-                              if(okay) {
-                                toggleAdminChecked(!adminChecked)
-                              } else {
-                                swal("This user was not marked as an admin.")
-                              }
-                            })}}>
-                    
+                          title: "Warning!",
+                          text:
+                            "Checking this box will alow this user admin access!",
+                          icon: "warning",
+                          buttons: true,
+                          dangerMode: true,
+                        }).then((okay) => {
+                          if (okay) {
+                            toggleAdminChecked(!adminChecked);
+                          } else {
+                            swal("This user was not marked as an admin.");
+                          }
+                        });
+                      }}
+                    >
                       No
                     </button>
                     <span>
