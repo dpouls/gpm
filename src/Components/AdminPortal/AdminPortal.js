@@ -2,11 +2,11 @@ import Axios from "axios";
 import React, { useState, useEffect } from "react";
 import { withRouter } from "react-router-dom";
 import "./AdminPortal.scss";
-import Form from "react-bootstrap/Form";
 import NewRenter from "./NewRenter/NewRenter";
 import swal from "sweetalert";
 
 const AdminPortal = (props) => {
+  //Makes sure the user has admin authorization on mounting
   useEffect(() => {
     Axios.get("/api/user").then((res) => {
       console.log("admin resdata");
@@ -15,6 +15,7 @@ const AdminPortal = (props) => {
       }
     });
   }, []);
+  //declare state variables
   const [rentersClicked, toggleRentersClicked] = useState(true);
   const [newRenterClicked, toggleNRClicked] = useState(true);
   const [adminChecked, toggleAdminChecked] = useState(false);
@@ -32,26 +33,36 @@ const AdminPortal = (props) => {
     generateUsername();
     console.log(generatedUsername);
     console.log(newRenterForm);
-  }, [newRenterForm]);
+  }, [newRenterForm.phoneNumber]);
 
   const [propertiesClicked, togglePropertiesClicked] = useState(false);
   const [paymentsClicked, togglePaymentsClicked] = useState(false);
   const [mRClicked, toggleMRClicked] = useState(false);
   const [generatedUsername, setGeneratedUsername] = useState("");
-  const generateUsername = () => {
-    if (newRenterForm.phoneNumber.length > 0) {
+  const [usernameWasGenerated, toggleUsernameGenerated] = useState(false)
+
+  //generates a username off of the firstName lastName and last four digits of the phone number. Can be changed if desired.
+  const generateUsername = async () => {
+    // if(!usernameWasGenerated){
+      if (newRenterForm.phoneNumber.length > 9) {
       let lastFour = /[0-9]{4}$/;
       let lastFourPhone = lastFour.exec(newRenterForm.phoneNumber);
-      setGeneratedUsername(
+      await setGeneratedUsername(
         newRenterForm.firstName + newRenterForm.lastName + lastFourPhone
       );
-      console.log("generateusername fired");
+      await setNewRenterForm({ ...newRenterForm, username: generatedUsername });
+      toggleUsernameGenerated(true);
+
+    // }
     }
+    
     console.log("generate username didnt fire yet");
   };
+  //handles all input fields and setting their values to state.
   const inputHandler = (e) => {
     setNewRenterForm({ ...newRenterForm, [e.target.name]: e.target.value });
   };
+  console.log("lets see username:", newRenterForm.username);
   return (
     <div className="admin-portal">
       <button onClick={() => toggleRentersClicked(!rentersClicked)}>
@@ -79,13 +90,23 @@ const AdminPortal = (props) => {
               <label for="email">Email</label>
               <input name="email" type="email" onChange={inputHandler} />
               <label for="phoneNumber">Phone Number</label>
-              <input name="phoneNumber" type="text" onChange={inputHandler} />
+              <input
+                name="phoneNumber"
+                type="text"
+                maxLength="10"
+                onChange={inputHandler}
+              />
               <label for="username">Username</label>
               <input
-                value={generatedUsername}
+                value={newRenterForm.username}
                 name="username"
                 type="text"
-                onChange={inputHandler}
+                onFocus={generateUsername}
+                onChange={(e) => {
+                  toggleUsernameGenerated(false)
+                  setGeneratedUsername(e.target.value);
+                  inputHandler(e);
+                }}
               />
               <label for="password">Password</label>
               <input name="password" type="password" onChange={inputHandler} />
