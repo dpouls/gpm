@@ -35,7 +35,18 @@
     width: 100%;
     display: flex;
     flex-direction: column;
+    align-items: center;
+    box-sizing: border-box;
+    padding: 10px;
+    section {
+        display: flex;
+        flex-direction: column;
+        box-sizing: border-box;
+        padding: 10px;
+    }
     label {
+        display: flex;
+        justify-content: space-between;
         margin-top: 10px;
         font-weight: bold;
     }
@@ -47,8 +58,13 @@
         padding: 5px 10px;
         font-size: large;
     }
+    div {
+        display: flex;
+        align-items: center;
+    }
+
 }
-  
+
 #admin-button-checked {
     width: 50px;
     margin: 10px;
@@ -65,4 +81,8 @@
     align-content: center;
     align-items: center;
     
+}
+#submit-new-renter-btn {
+    background-color: green;
+    width: 100%;
 }
