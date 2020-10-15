@@ -18,6 +18,7 @@ app.use(session({
     secret: SESSION_SECRET,
     cookie: {maxAge: 1000 * 60 * 60}
 }))
+
 massive({
     connectionString: CONNECTION_STRING,
     ssl: {rejectUnauthorized: false}

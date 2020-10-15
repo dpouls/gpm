@@ -1,36 +1,29 @@
 const bcrypt = require('bcryptjs')
 module.exports = {
     register: async(req,res) => {
-        const {username,password} = req.body 
+        const {username,password,email,isadmin,first_name,last_name, occupants, pet, phone_number} = req.body 
         const db = req.app.get('db')
-        const {session} = req
         let user = await db.auth.check_user(username)
         user = user[0]
         if(user){
             return res.status(400).send('User already exists')
         }
+        const parsedPhone = +phone_number
         const salt = bcrypt.genSaltSync(10)
         const hash = bcrypt.hashSync(password,salt)
 
-        let newUser = await db.auth.register_user(username, hash)
+        let newUser = await db.user.create_new_user(email,username, hash, isadmin, first_name, last_name, occupants, pet, parsedPhone)
         newUser = newUser[0]
-        
-        let sessionUser = newUser
-        session.user = sessionUser
-        res.status(201).send(session.user)
+        res.sendStatus(201)
     },
     login: async(req, res) => {
         const {username, password} = req.body 
         const {session} = req
-        const db = req.app.get('db')
-        
-        // console.log('body', req.body)
-      
+        const db = req.app.get('db')   
         let user = await db.auth.check_user(username)
         user = user[0]
         if(!user){
             return res.status(400).send("User doesn't exist")
-            
         }
         const authorized = bcrypt.compareSync(password,user.password)
         if(authorized){

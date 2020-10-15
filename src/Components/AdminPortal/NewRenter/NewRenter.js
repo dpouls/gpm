@@ -21,6 +21,7 @@ const NewRenter = () => {
     generateUsername();
   }, [newRenterForm.phoneNumber]);
 
+  
   //generates a username off of the firstName lastName and last four digits of the phone number. Can be changed if desired.
   const generateUsername = async () => {
     if (newRenterForm.phoneNumber.length > 9) {
