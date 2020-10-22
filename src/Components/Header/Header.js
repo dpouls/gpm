@@ -21,7 +21,7 @@ const Header = (props) => {
 
   },[])
     useEffect(() => {
-      if(!userInfo.renter_id){
+      if(!userInfo.user_id){
         setNavigationLinks(["Home",
           "Log in"])
       }
@@ -35,7 +35,7 @@ const Header = (props) => {
         }
       }
       
-      console.log('userinfo check')
+      console.log('userinfo check', userInfo)
     }, [userInfo])
 
   return (

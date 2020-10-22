@@ -16,7 +16,7 @@ const Portal = (props) => {
     setLoading(true);
     Axios.get("/api/user")
       .then((res) => {
-        console.log(res.data);
+        console.log('userinfo:',res.data);
         setCurrentUser(res.data);
         setLoading(false);
       })

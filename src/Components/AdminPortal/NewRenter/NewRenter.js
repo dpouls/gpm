@@ -1,10 +1,11 @@
+import Axios from "axios";
 import React, { useState, useEffect } from "react";
 import swal from "sweetalert";
-
+import { withRouter } from "react-router-dom";
+// still needs input error proofing 
 import "./NewRenter.scss";
-const NewRenter = () => {
+const NewRenter = (props) => {
   //Declare state variables
-  const [adminChecked, toggleAdminChecked] = useState(false);
   const [generatedUsername, setGeneratedUsername] = useState("");
   const [newRenterForm, setNewRenterForm] = useState({
     firstName: "",
@@ -15,6 +16,7 @@ const NewRenter = () => {
     password: "",
     occupants: "",
     isadmin: false,
+    pet: false
   });
   //watches for last digit of phone number to generate a username
   useEffect(() => {
@@ -38,13 +40,32 @@ const NewRenter = () => {
     setNewRenterForm({ ...newRenterForm, [e.target.name]: e.target.value });
   };
 
+  const submitNewRenterForm = (e) => {
+    e.preventDefault();
+    Axios.post('/auth/register', newRenterForm).then(res => {
+      swal('Success!',"You have created a new renter!", 'success')
+      props.newRenterClickedFn(false)
+      props.rentersClickedFn(false)
+      setNewRenterForm({...newRenterForm,     firstName: "",
+      lastName: "",
+      email: "",
+      phoneNumber: "",
+      username: "",
+      password: "",
+      occupants: "",
+      isadmin: false,
+      pet: false}
+      )
+    }
+    )
+  }
   return (
     <div>
       <form className="new-renter-form">
         <section>
           <label htmlFor="firstName">
             First Name
-            <input name="firstName" type="text" onChange={inputHandler} />
+            <input minLength='1' name="firstName" type="text" onChange={inputHandler} />
           </label>
 
           <label htmlFor="lastName">
@@ -90,13 +111,15 @@ const NewRenter = () => {
           </label>
           <label className="admin-checkbox-container" htmlFor="adminCheckbox">
             Admin:{" "}
-            {adminChecked ? (
+            {newRenterForm.isadmin ? (
               <div>
                 <button
                   type="button"
                   name="adminCheckbox"
                   id="admin-button-checked"
-                  onClick={() => toggleAdminChecked(!adminChecked)}
+                  onClick={() => {
+                    setNewRenterForm({...newRenterForm, isadmin: false})
+                  }}
                 >
                   Yes
                 </button>
@@ -120,7 +143,7 @@ const NewRenter = () => {
                       dangerMode: true,
                     }).then((okay) => {
                       if (okay) {
-                        toggleAdminChecked(!adminChecked);
+                        setNewRenterForm({...newRenterForm, isadmin: true})
                       } else {
                         swal("This user was not marked as an admin.");
                       }
@@ -133,11 +156,11 @@ const NewRenter = () => {
               </div>
             )}
           </label>
-          <button id="submit-new-renter-btn">Submit New Renter Form</button>
+          <button id="submit-new-renter-btn" onClick={e => submitNewRenterForm(e)}>Submit New Renter Form</button>
         </section>
       </form>
     </div>
   );
 };
 
-export default NewRenter;
+export default withRouter(NewRenter);

@@ -6,9 +6,7 @@ import "./Login.scss";
 const Login = (props) => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
-  // useEffect(() => {
-  //     console.log(password)
-  // },[password])
+
   const login = (e) => {
     Axios.post("/auth/login", { username, password }).then((res) => {
         console.log(res.data)

@@ -16,8 +16,8 @@ const AdminPortal = (props) => {
   }, []);
 
   //declare state variables
-  const [rentersClicked, toggleRentersClicked] = useState(true);
-  const [newRenterClicked, toggleNRClicked] = useState(true);
+  const [rentersClicked, toggleRentersClicked] = useState(false);
+  const [newRenterClicked, toggleNRClicked] = useState(false);
   const [propertiesClicked, togglePropertiesClicked] = useState(false);
   const [paymentsClicked, togglePaymentsClicked] = useState(false);
   const [mRClicked, toggleMRClicked] = useState(false);
@@ -38,7 +38,7 @@ const AdminPortal = (props) => {
               Add a New Renter
             </button>
           </div>
-          {newRenterClicked ? <NewRenter /> : null}
+          {newRenterClicked ? <NewRenter rentersClickedFn={toggleRentersClicked} newRenterClickedFn={toggleNRClicked} /> : null}
         </div>
       ) : null}
       <button onClick={() => togglePropertiesClicked(!propertiesClicked)}>

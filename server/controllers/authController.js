@@ -1,18 +1,18 @@
 const bcrypt = require('bcryptjs')
 module.exports = {
     register: async(req,res) => {
-        const {username,password,email,isadmin,first_name,last_name, occupants, pet, phone_number} = req.body 
+        const {username,password,email,isadmin,firstName,lastName, occupants, pet, phoneNumber} = req.body 
         const db = req.app.get('db')
         let user = await db.auth.check_user(username)
         user = user[0]
         if(user){
             return res.status(400).send('User already exists')
         }
-        const parsedPhone = +phone_number
+        const parsedPhone = +phoneNumber
         const salt = bcrypt.genSaltSync(10)
         const hash = bcrypt.hashSync(password,salt)
 
-        let newUser = await db.user.create_new_user(email,username, hash, isadmin, first_name, last_name, occupants, pet, parsedPhone)
+        let newUser = await db.user.create_new_user(email,username, hash, isadmin, firstName, lastName, occupants, pet, parsedPhone)
         newUser = newUser[0]
         res.sendStatus(201)
     },
