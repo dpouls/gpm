@@ -18,8 +18,6 @@ const CardForm = (props) => {
   const stripe = useStripe();
   const elements = useElements();
 
-  console.log("cardform", props);
-
   const processCardPayment = async (e) => {
     e.preventDefault();
     const { error, paymentMethod } = await stripe.createPaymentMethod({
@@ -28,7 +26,6 @@ const CardForm = (props) => {
     });
     if (!error) {
       const { id } = paymentMethod;
-      console.log(paymentMethod);
       try {
         const data = await axios
           .post("/api/charge", {
@@ -36,11 +33,9 @@ const CardForm = (props) => {
             amount: props.rentDue * 100,
           })
           .then((res) => {
-            console.log(res);
             props.PayProps.history.push("/");
             swal("Success", "Your payment was completed!", "success");
           });
-        console.log(data);
       } catch (error) {
         console.log(error);
       }
@@ -59,9 +54,7 @@ const CardForm = (props) => {
         <form
           className="card_form"
           onSubmit={(e) => {
-            // props.toggleCard(false)
             processCardPayment(e);
-            // toggleProcessing(true);
           }}
         >
           <CardElement className="card_element" />
@@ -91,16 +84,15 @@ const Pay = (props) => {
   useEffect(() => {
     getUserInfo();
   }, []);
+
   const getUserInfo = async () => {
     setLoading(true);
     Axios.get("/api/user")
       .then((res) => {
-        console.log(res.data);
         setCurrentUser(res.data);
 
         if (res.data.pet) {
           let rentWithPetFee = parseInt(res.data.rental_price) + 50;
-          console.log(rentWithPetFee);
           setRentDue(rentWithPetFee);
         }
 
@@ -108,7 +100,6 @@ const Pay = (props) => {
       })
       .catch((err) => props.history.push("/login"));
   };
-  console.log("payprops", props);
   return (
     <div className="pay-page-container">
       <div>
