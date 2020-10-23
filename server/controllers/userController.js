@@ -11,7 +11,6 @@ module.exports = {
                 }
                 //if no property is assigned, then it will only return the users information and not the tied property information.
                 else {
-                    console.log('else')
                     db.user.get_only_user_info(req.session.user.user_id).then(
                         userInfo => {
                           res.status(200).send(userInfo[0])

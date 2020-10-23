@@ -5,6 +5,8 @@ import ingot from "../../assets/ingot.jpg";
 import Axios from "axios";
 import { withRouter } from "react-router-dom";
 
+
+// I think the admin link is broken now...
 const Header = (props) => {
   const [menuClicked, toggleMenuClicked] = useState(false);
   const [navigationLinks, setNavigationLinks] = useState([
