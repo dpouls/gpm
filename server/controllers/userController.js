@@ -24,5 +24,15 @@ module.exports = {
         } else {
             res.sendStatus(404)
         }
+    },
+
+    getAllRenters: (req,res) => {
+        if(req.session.user.isadmin){
+            const db = req.app.get('db')
+            db.user.get_all_renters()
+            .then((renters) => {
+                res.status(200).send(renters)
+            })
+        }
     }
 }

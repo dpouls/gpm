@@ -51,8 +51,8 @@ const Header = (props) => {
     </div>
     {menuClicked ? (
         <section className='nav-links-container'>
-          {navigationLinks.map((navLink) => {
-            return <section onClick={() => {
+          {navigationLinks.map((navLink, i) => {
+            return <section key={i} onClick={() => {
               if(navLink === 'Home'){props.history.push('/')}
               else if(navLink === 'Log out'){
                   Axios.post('/auth/logout').then(() => props.history.push('/'))

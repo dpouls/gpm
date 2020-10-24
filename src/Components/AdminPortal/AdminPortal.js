@@ -3,6 +3,7 @@ import React, { useState, useEffect } from "react";
 import { withRouter } from "react-router-dom";
 import "./AdminPortal.scss";
 import NewRenter from "./NewRenter/NewRenter";
+import RenterList from "./RenterList/RenterList"
 
 const AdminPortal = (props) => {
   //Makes sure the user has admin authorization on mounting
@@ -17,6 +18,7 @@ const AdminPortal = (props) => {
 
   //declare state variables
   const [rentersClicked, toggleRentersClicked] = useState(false);
+  const [currentRentersClicked, toggleCRClicked] = useState(false);
   const [newRenterClicked, toggleNRClicked] = useState(false);
   const [propertiesClicked, togglePropertiesClicked] = useState(false);
   const [paymentsClicked, togglePaymentsClicked] = useState(false);
@@ -30,7 +32,13 @@ const AdminPortal = (props) => {
       {rentersClicked ? (
         <div>
           <div className="sub-button-container">
-            <button id="sub-button">See Current Renters</button>
+            <button id="sub-button"
+            onClick={() => toggleCRClicked(!currentRentersClicked)}> See Current Renters</button>
+            {currentRentersClicked ? (
+              <RenterList />
+            ) : (
+              null
+            )}
             <button
               id="sub-button"
               onClick={() => toggleNRClicked(!newRenterClicked)}

@@ -36,6 +36,7 @@ app.get('/auth/currentuser')
 
 //User Endpoints
 app.get('/api/user', uc.getUserInfo)
+app.get('/api/renters', uc.getAllRenters)
 //Payment Endpoints
 app.post('/api/charge', pc.processPayment)
 
