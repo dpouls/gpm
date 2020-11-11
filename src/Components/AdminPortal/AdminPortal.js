@@ -5,6 +5,7 @@ import "./AdminPortal.scss";
 import NewRenter from "./NewRenter/NewRenter";
 import RenterList from "./RenterList/RenterList";
 import PropertyList from "./PropertyList/PropertyList";
+import NewProperty from "./NewProperty/NewProperty";
 
 const AdminPortal = (props) => {
   //Makes sure the user has admin authorization on mounting
@@ -23,6 +24,7 @@ const AdminPortal = (props) => {
   const [newRenterClicked, toggleNRClicked] = useState(false);
   const [propertiesClicked, togglePropertiesClicked] = useState(false);
   const [allPropertiesClicked, toggleAPClicked] = useState(false);
+  const [newPropertyClicked, toggleNPClicked] = useState(false);
   const [paymentsClicked, togglePaymentsClicked] = useState(false);
   const [mRClicked, toggleMRClicked] = useState(false);
 
@@ -60,7 +62,10 @@ const AdminPortal = (props) => {
             {allPropertiesClicked ? (
               <PropertyList/>
             ) : null}
-          <button id="sub-button">Add a New Property</button>
+          <button id="sub-button" onClick={() => toggleNPClicked(!newPropertyClicked)}>Add a New Property</button>
+            {newPropertyClicked ? (
+              <NewProperty/>
+            ) : null}
         </div>
       ) : null}
       <button onClick={() => togglePaymentsClicked(!paymentsClicked)}>

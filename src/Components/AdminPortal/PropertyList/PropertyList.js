@@ -14,7 +14,7 @@ const PropertyList = () => {
   }, []);
   // this is where a list of all the Properties will go.
   return allProperties.length > 0 ? (
-    <Table id='property-list-table' striped bordered hover responsive variant='dark'>
+    <Table id='property-list-table' striped responsive hover  variant='dark'>
       <thead>
         <tr>
           <th>ID</th>
@@ -26,7 +26,6 @@ const PropertyList = () => {
         </thead> 
         <tbody>
       {allProperties.map((el) => {
-        
         return (
           <tr>
           <td>{el.property_id}</td>
