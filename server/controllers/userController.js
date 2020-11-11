@@ -34,5 +34,8 @@ module.exports = {
                 res.status(200).send(renters)
             })
         }
+        else {
+            res.sendStatus(401)
+        }
     }
 }

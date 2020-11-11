@@ -6,6 +6,7 @@ const express = require('express'),
       pc = require('./controllers/paymentController'),
       uc = require('./controllers/userController'),
       rc = require('./controllers/requestController'),
+      prc = require('./controllers/propertyController'),
       app = express();
 
 const {SERVER_PORT, CONNECTION_STRING, SESSION_SECRET} = process.env
@@ -39,6 +40,8 @@ app.get('/api/user', uc.getUserInfo)
 app.get('/api/renters', uc.getAllRenters)
 //Payment Endpoints
 app.post('/api/charge', pc.processPayment)
+//Property Endpoints 
+app.get('/api/properties',prc.getAllProperties)
 
 //Maintenance Request Endpoints
 app.post('/api/request', rc.createRequest)

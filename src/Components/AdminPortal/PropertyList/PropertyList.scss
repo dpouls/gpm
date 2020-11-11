@@ -1,0 +1,18 @@
+#property-list-table {
+    width: 100%;
+    overflow: scroll;
+    border-radius: 10px;
+    outline: none;
+    max-width: 90vw;;
+    // margin: 0;
+
+    &:focus {
+        border: none;
+        outline: none;
+    }
+}
+
+.table-responsive {
+    display: flex;
+    justify-content: center;
+}

@@ -3,7 +3,8 @@ import React, { useState, useEffect } from "react";
 import { withRouter } from "react-router-dom";
 import "./AdminPortal.scss";
 import NewRenter from "./NewRenter/NewRenter";
-import RenterList from "./RenterList/RenterList"
+import RenterList from "./RenterList/RenterList";
+import PropertyList from "./PropertyList/PropertyList";
 
 const AdminPortal = (props) => {
   //Makes sure the user has admin authorization on mounting
@@ -21,6 +22,7 @@ const AdminPortal = (props) => {
   const [currentRentersClicked, toggleCRClicked] = useState(false);
   const [newRenterClicked, toggleNRClicked] = useState(false);
   const [propertiesClicked, togglePropertiesClicked] = useState(false);
+  const [allPropertiesClicked, toggleAPClicked] = useState(false);
   const [paymentsClicked, togglePaymentsClicked] = useState(false);
   const [mRClicked, toggleMRClicked] = useState(false);
 
@@ -45,8 +47,8 @@ const AdminPortal = (props) => {
             >
               Add a New Renter
             </button>
-          </div>
           {newRenterClicked ? <NewRenter rentersClickedFn={toggleRentersClicked} newRenterClickedFn={toggleNRClicked} /> : null}
+          </div>
         </div>
       ) : null}
       <button onClick={() => togglePropertiesClicked(!propertiesClicked)}>
@@ -54,7 +56,10 @@ const AdminPortal = (props) => {
       </button>
       {propertiesClicked ? (
         <div className="sub-button-container">
-          <button id="sub-button">See Current Properties</button>
+          <button id="sub-button" onClick={() => toggleAPClicked(!allPropertiesClicked)}>See Current Properties</button>
+            {allPropertiesClicked ? (
+              <PropertyList/>
+            ) : null}
           <button id="sub-button">Add a New Property</button>
         </div>
       ) : null}

@@ -3,6 +3,7 @@ import React, { useState, useEffect } from "react";
 import { withRouter } from "react-router-dom";
 import Spinner from "react-bootstrap/Spinner";
 import Table from 'react-bootstrap/Table'
+import './RenterList.scss'
 
 const RenterList = () => {
   const [allRenters, setAllRenters] = useState([]);
@@ -13,13 +14,13 @@ const RenterList = () => {
   }, []);
   // this is where a list of all the renters will go. work in progress!
   return allRenters.length > 0 ? (
-    <Table striped bordered hover>
+    <Table id='renter-list-table' striped bordered hover responsive variant='dark'>
       <thead>
         <tr>
           <th>First Name</th>
           <th>Last Name</th>
           <th>Phone Number</th>
-          <th>Email</th>
+          <th className="email">Email</th>
         </tr>
         </thead> 
         <tbody>
@@ -30,7 +31,7 @@ const RenterList = () => {
           <td>{el.first_name}</td>
           <td>{el.last_name}</td>
           <td>{el.phone_number}</td>
-          <td>{el.email}</td>
+          <td className="email">{el.email}</td>
         </tr>
       )
     }

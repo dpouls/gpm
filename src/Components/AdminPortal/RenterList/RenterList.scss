@@ -1,0 +1,11 @@
+#renter-list-table {
+    width: 100%;
+    overflow: scroll;
+    border-radius: 10px;
+}
+
+@media only screen and (max-width: 600px) {
+    .email {
+        display: none;
+    }
+}

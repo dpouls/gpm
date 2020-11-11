@@ -3,6 +3,8 @@
     width: 100%;
     display: flex;
     flex-direction: column;
+    background-color: $grey;
+    border-radius: 10px;
     input {
         border-radius: 10px;
         outline: none;
