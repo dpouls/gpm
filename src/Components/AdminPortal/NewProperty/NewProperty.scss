@@ -9,15 +9,7 @@
     max-width: 500px;
     box-sizing: border-box;
     padding: 0 15px;
-    input {
-        border-radius: 10px;
-        outline: none;
-        border: none;
-        box-sizing: border-box;
-        padding: 5px 10px;
-        font-size: large;
-        width: 60%;
-    }
+
     section {
         display: flex;
         flex-direction: column;
@@ -29,6 +21,7 @@
         justify-content: space-between;
         margin-top: 10px;
         font-weight: bold;
+        align-items: center;
 
     }
     input {
@@ -38,10 +31,19 @@
         box-sizing: border-box;
         padding: 5px 10px;
         font-size: large;
-        height: 2em;
+        height: 2em; 
+        width: 60%;
     }
     div {
         display: flex;
         align-items: center;
     }
+}
+
+#yes-button {
+ width: 60%;
+}
+
+#no-button {
+ width: 60%;
 }

@@ -22,7 +22,6 @@ const NewProperty = () => {
         console.log('fd', formData)
     }
     return (
-        // <div>
             <form className='new-property-form'>
                 <label htmlFor='streetAddress'>Street Address
                     <input name='streetAddress' onChange={inputHandler} type="text"/>
@@ -42,14 +41,14 @@ const NewProperty = () => {
                 <label htmlFor='bathrooms'>Bathrooms
                     <input name='bathrooms' onChange={inputHandler} type="number"/>
                 </label>
-                <label htmlFor='occupied'>Occupied
-                    <input name='occupied' onChange={inputHandler} type="text"/>
+                <label htmlFor='occupied'>Occupied?
+                    {formData.occupied ? (<button id='yes-button' type='button' onClick={() => setFormData({...formData, occupied: false})}>Yes</button>) : (<button id='no-button' type='button' onClick={() => setFormData({...formData, occupied: true})}>No</button>)}
+                    
                 </label>
-                <label htmlFor='available'>Available
-                    <input name='available' onChange={inputHandler} type="text"/>
+                <label htmlFor='available'>Available?
+                {formData.available ? (<button id='yes-button' type='button' onClick={() => setFormData({...formData, available: false})}>Yes</button>) : (<button id='no-button' type='button' onClick={() => setFormData({...formData, available: true})}>No</button>)}
                 </label>
             </form>
-        // </div>
     )
 }
 
