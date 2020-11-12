@@ -5,6 +5,8 @@
     display: flex;
     flex-direction: column;
     align-items: center;
+    box-sizing: border-box;
+    padding: 0 30px;
     button {
         border: none;
         box-sizing: border-box;
@@ -26,7 +28,7 @@
     align-items: center;
     align-content: center;
     box-sizing: border-box;
-    padding: 25px;
+    // padding: 25px;
 
 }
 

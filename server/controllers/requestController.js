@@ -27,7 +27,6 @@ module.exports = {
             image_three = '',
             is_complete = false;
 
-            console.log('reqbody', req.body)
             let problemAreas = [
                 "bathroom",
                 "bedroom",
@@ -108,7 +107,6 @@ module.exports = {
                 is_complete
             ])
             .then(request => { 
-                console.log('res',res)
                 res.status(200).send(request[0])
             }).catch(err => res.status(500).send(err))
 
@@ -117,9 +115,15 @@ module.exports = {
         }
     },
     getAllRequests: (req,res) => {
-        const db = req.app.get('db')
+        if(req.session.user.isadmin){
+            const db = req.app.get('db')
         db.requests.get_all_requests()
         .then(requests => res.status(200).send(requests))
         .catch(err => res.status(500).send(err))
+        }
+        else {
+            res.status(404).send("Unauthorized")
+        }
+        
     }
 }

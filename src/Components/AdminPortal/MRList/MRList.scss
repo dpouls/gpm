@@ -1,0 +1,17 @@
+@import '../../../sass/variables.scss';
+
+#request-list-table {
+    // width: ;
+    border-radius: 10px;
+}
+#emergency-request {
+    background-color: rgb(121, 93, 93);
+}
+
+#complete-request {
+    background-color: rgb(89, 128, 89);
+}
+
+#not-complete-request {
+    background-color: rgb(138, 125, 90);
+}

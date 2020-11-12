@@ -12,9 +12,8 @@ const PropertyList = () => {
       .then((res) => setAllProperties(res.data))
       .catch((err) => console.log(err));
   }, []);
-  // this is where a list of all the Properties will go.
   return allProperties.length > 0 ? (
-    <Table id='property-list-table' striped hover responsive variant='dark'>
+    <Table id='property-list-table' size='sm' striped hover responsive variant='dark'>
       <thead>
         <tr>
           <th>ID</th>
@@ -48,6 +47,7 @@ const PropertyList = () => {
       
       />
       );
+  
 };
 
 export default withRouter(PropertyList);

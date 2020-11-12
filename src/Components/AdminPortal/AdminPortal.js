@@ -6,6 +6,7 @@ import NewRenter from "./NewRenter/NewRenter";
 import RenterList from "./RenterList/RenterList";
 import PropertyList from "./PropertyList/PropertyList";
 import NewProperty from "./NewProperty/NewProperty";
+import MRList from './MRList/MRList'
 
 const AdminPortal = (props) => {
   //Makes sure the user has admin authorization on mounting
@@ -27,6 +28,7 @@ const AdminPortal = (props) => {
   const [newPropertyClicked, toggleNPClicked] = useState(false);
   const [paymentsClicked, togglePaymentsClicked] = useState(false);
   const [mRClicked, toggleMRClicked] = useState(false);
+  const [curMRClicked, toggleCurMRClicked] = useState(false)
 
   return (
     <div className="admin-portal">
@@ -81,7 +83,8 @@ const AdminPortal = (props) => {
       </button>
       {mRClicked ? (
         <div className="sub-button-container">
-          <button id="sub-button">See Current Maintenance Requests</button>
+          <button id="sub-button" onClick={() => toggleCurMRClicked(!curMRClicked)}>See Current Maintenance Requests</button>
+          {curMRClicked ? (<MRList/>) : null}
         </div>
       ) : null}
     </div>

@@ -14,7 +14,7 @@ const RenterList = () => {
   }, []);
   // this is where a list of all the renters will go. work in progress!
   return allRenters.length > 0 ? (
-    <Table id='renter-list-table' striped hover responsive variant='dark'>
+    <Table id='renter-list-table' size='sm' striped hover responsive variant='dark'>
       <thead>
         <tr>
           <th>First Name</th>
