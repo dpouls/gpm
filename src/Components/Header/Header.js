@@ -1,12 +1,10 @@
 import React, { useState, useEffect } from "react";
 
 import "./Header.scss";
-import ingot from "../../assets/ingot.jpg";
 import Axios from "axios";
 import { withRouter } from "react-router-dom";
 
 
-// I think the admin link is broken now...
 const Header = (props) => {
   const [menuClicked, toggleMenuClicked] = useState(false);
   const [navigationLinks, setNavigationLinks] = useState([
@@ -37,7 +35,6 @@ const Header = (props) => {
         }
       }
       
-      console.log('userinfo check', userInfo)
     }, [userInfo])
 
   return (

@@ -24,9 +24,9 @@ const PropertyList = () => {
         </tr>
         </thead> 
         <tbody>
-      {allProperties.map((el) => {
+      {allProperties.map((el,i) => {
         return (
-          <tr>
+          <tr key={i}>
           <td>{el.property_id}</td>
           <td>{el.street_address}</td>
           <td>{el.city}</td>

@@ -24,10 +24,10 @@ const RenterList = () => {
         </tr>
         </thead> 
         <tbody>
-      {allRenters.map((el) => {
+      {allRenters.map((el,i) => {
         
         return (
-          <tr>
+          <tr key={i}>
           <td>{el.first_name}</td>
           <td>{el.last_name}</td>
           <td>{el.phone_number}</td>

@@ -12,11 +12,13 @@ const AdminPortal = (props) => {
   //Makes sure the user has admin authorization on mounting
   useEffect(() => {
     Axios.get("/api/user").then((res) => {
-      console.log("admin resdata");
       if (!res.data.isadmin) {
         Axios.post("/auth/logout").then(props.history.push("/"));
       }
-    });
+      
+      console.log("admin resdata");
+    })
+    .catch(err => props.history.push('/login'))
   }, []);
 
   //declare state variables

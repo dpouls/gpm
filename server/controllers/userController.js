@@ -22,7 +22,7 @@ module.exports = {
                 console.log(err)
                 res.status(500).send(err)})
         } else {
-            res.sendStatus(404)
+            res.status(404).send('No user')
         }
     },
 
