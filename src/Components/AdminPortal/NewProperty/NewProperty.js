@@ -21,6 +21,12 @@ const NewProperty = () => {
         setFormData({...formData, [e.target.name]: e.target.value})
         console.log('fd', formData)
     }
+    const submitForm = (e) => {
+        console.log('hit')
+        e.preventDefault();
+        Axios.post('/api/property',formData)
+        .then(res => console.log(res.data))
+    }
     return (
             <form className='new-property-form'>
                 <label htmlFor='streetAddress'>Street Address
@@ -48,6 +54,7 @@ const NewProperty = () => {
                 <label htmlFor='available'>Available?
                 {formData.available ? (<button id='yes-button' type='button' onClick={() => setFormData({...formData, available: false})}>Yes</button>) : (<button id='no-button' type='button' onClick={() => setFormData({...formData, available: true})}>No</button>)}
                 </label>
+                <button id='submit-new-property' onClick={submitForm} type='button'>Submit</button>
             </form>
     )
 }

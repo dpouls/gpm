@@ -115,5 +115,11 @@ module.exports = {
         } else {
             res.sendStatus(404)
         }
+    },
+    getAllRequests: (req,res) => {
+        const db = req.app.get('db')
+        db.requests.get_all_requests()
+        .then(requests => res.status(200).send(requests))
+        .catch(err => res.status(500).send(err))
     }
 }

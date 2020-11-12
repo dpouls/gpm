@@ -45,5 +45,6 @@ app.get('/api/properties',prc.getAllProperties)
 app.post('/api/property', prc.createProperty)
 //Maintenance Request Endpoints
 app.post('/api/request', rc.createRequest)
+app.get('/api/requests',rc.getAllRequests)
 
 app.listen(SERVER_PORT, () => console.log(`Server running on port ${SERVER_PORT}`))
