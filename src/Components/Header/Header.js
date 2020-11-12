@@ -3,6 +3,7 @@ import React, { useState, useEffect } from "react";
 import "./Header.scss";
 import Axios from "axios";
 import { withRouter } from "react-router-dom";
+import logo from '../../assets/goldenLogo.png'
 
 
 const Header = (props) => {
@@ -12,6 +13,7 @@ const Header = (props) => {
     "Portal",
     "Log out"
   ]);
+
   const [userInfo, setUserInfo] = useState({})
    useEffect( () => {
      Axios.get('/api/user').then(res => {
@@ -40,6 +42,7 @@ const Header = (props) => {
   return (
     <div className='header-nav-links-container'>
     <div className="header-container">
+      <img src={logo} alt="asdf"/>
       <i
         onClick={() => toggleMenuClicked(!menuClicked)}
         className="fas fa-bars"
