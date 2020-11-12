@@ -1,5 +1,5 @@
 import Axios from "axios";
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import swal from "sweetalert";
 import { withRouter } from "react-router-dom";
 import './NewProperty.scss'
@@ -25,7 +25,8 @@ const NewProperty = () => {
         console.log('hit')
         e.preventDefault();
         Axios.post('/api/property',formData)
-        .then(res => console.log(res.data))
+        .then(res => swal("Success", "Your new property was created!", "success"))
+        .catch( swal("Oops!", "Something went wrong, please try again","error"))
     }
     return (
             <form className='new-property-form'>

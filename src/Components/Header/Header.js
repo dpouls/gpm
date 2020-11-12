@@ -18,7 +18,7 @@ const Header = (props) => {
       setUserInfo(res.data)
     })
 
-
+    console.log('infinite loop')
   },[])
     useEffect(() => {
       if(!userInfo.user_id){
@@ -35,7 +35,7 @@ const Header = (props) => {
         }
       }
       
-    }, [userInfo])
+    }, [userInfo,menuClicked])
 
   return (
     <div className='header-nav-links-container'>
@@ -52,7 +52,9 @@ const Header = (props) => {
             return <section key={i} onClick={() => {
               if(navLink === 'Home'){props.history.push('/')}
               else if(navLink === 'Log out'){
-                  Axios.post('/auth/logout').then(() => props.history.push('/'))
+                  Axios.post('/auth/logout').then(() => {
+                    setUserInfo({})
+                    props.history.push('/')})
                 }
               else if(navLink === 'Log in') {
                 props.history.push('/login')

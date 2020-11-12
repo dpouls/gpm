@@ -60,4 +60,4 @@ const MRList = () => {
         );
 }
 
-export default MRList
+export default withRouter(MRList);
