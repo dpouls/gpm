@@ -11,11 +11,11 @@ const NewProperty = () => {
         streetAddress: '',
         city: '',
         state: '',
-        occupied: false,
         rentalPrice: 0,
-        available: false,
         bedrooms: 0,
-        bathrooms: 0
+        bathrooms: 0,
+        occupied: false,
+        available: false
     })
     const inputHandler = (e) => {
         setFormData({...formData, [e.target.name]: e.target.value})
