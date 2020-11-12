@@ -35,39 +35,6 @@
 }
 
 
-.new-renter-form {
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    box-sizing: border-box;
-    padding: 10px;
-    section {
-        display: flex;
-        flex-direction: column;
-        box-sizing: border-box;
-        padding: 10px;
-    }
-    label {
-        display: flex;
-        justify-content: space-between;
-        margin-top: 10px;
-        font-weight: bold;
-    }
-    input {
-        border-radius: 10px;
-        outline: none;
-        border: none;
-        box-sizing: border-box;
-        padding: 5px 10px;
-        font-size: large;
-    }
-    div {
-        display: flex;
-        align-items: center;
-    }
-
-}
 
 #admin-button-checked {
     width: 50px;

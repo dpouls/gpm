@@ -1,0 +1,47 @@
+@import '../../../sass/variables.scss';
+.new-property-form {
+    height: auto;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    background-color: $grey;
+    border-radius: 10px;
+    max-width: 500px;
+    box-sizing: border-box;
+    padding: 0 15px;
+    input {
+        border-radius: 10px;
+        outline: none;
+        border: none;
+        box-sizing: border-box;
+        padding: 5px 10px;
+        font-size: large;
+        width: 60%;
+    }
+    section {
+        display: flex;
+        flex-direction: column;
+        box-sizing: border-box;
+        padding: 10px;
+    }
+    label {
+        display: flex;
+        justify-content: space-between;
+        margin-top: 10px;
+        font-weight: bold;
+
+    }
+    input {
+        border-radius: 10px;
+        outline: none;
+        border: none;
+        box-sizing: border-box;
+        padding: 5px 10px;
+        font-size: large;
+        height: 2em;
+    }
+    div {
+        display: flex;
+        align-items: center;
+    }
+}

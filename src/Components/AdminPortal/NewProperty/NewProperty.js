@@ -17,36 +17,39 @@ const NewProperty = () => {
         bedrooms: 0,
         bathrooms: 0
     })
-    //need input handler for all this
+    const inputHandler = (e) => {
+        setFormData({...formData, [e.target.name]: e.target.value})
+        console.log('fd', formData)
+    }
     return (
-        <div>
-            <form >
-                <label htmlFor='streetAddress'>
-                    <input name='streetAddress' type="text"/>
+        // <div>
+            <form className='new-property-form'>
+                <label htmlFor='streetAddress'>Street Address
+                    <input name='streetAddress' onChange={inputHandler} type="text"/>
                 </label>
-                <label htmlFor='city'>
-                    <input name='city' type="text"/>
+                <label htmlFor='city'>City
+                    <input name='city'onChange={inputHandler} type="text"/>
                 </label>
-                <label htmlFor='state'>
-                    <input name='state' type="text"/>
+                <label htmlFor='state'>State
+                    <input name='state' onChange={inputHandler} type="text"/>
                 </label>
-                <label htmlFor='rentalPrice'>$
-                    <input name='rentalPrice' type="number"/>
+                <label htmlFor='rentalPrice'>Price $
+                    <input name='rentalPrice' onChange={inputHandler} type="number"/>
                 </label>
-                <label htmlFor='bedrooms'>
-                    <input name='bedrooms' type="number"/>
+                <label htmlFor='bedrooms'>Bedrooms
+                    <input name='bedrooms' onChange={inputHandler} type="number"/>
                 </label>
-                <label htmlFor='bathrooms'>
-                    <input name='bathrooms' type="number"/>
+                <label htmlFor='bathrooms'>Bathrooms
+                    <input name='bathrooms' onChange={inputHandler} type="number"/>
                 </label>
-                <label htmlFor='occupied'>
-                    <input name='occupied' type="text"/>
+                <label htmlFor='occupied'>Occupied
+                    <input name='occupied' onChange={inputHandler} type="text"/>
                 </label>
-                <label htmlFor='available'>
-                    <input name='available' type="text"/>
+                <label htmlFor='available'>Available
+                    <input name='available' onChange={inputHandler} type="text"/>
                 </label>
             </form>
-        </div>
+        // </div>
     )
 }
 

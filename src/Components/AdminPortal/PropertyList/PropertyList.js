@@ -14,14 +14,14 @@ const PropertyList = () => {
   }, []);
   // this is where a list of all the Properties will go.
   return allProperties.length > 0 ? (
-    <Table id='property-list-table' striped responsive hover  variant='dark'>
+    <Table id='property-list-table' striped hover responsive variant='dark'>
       <thead>
         <tr>
           <th>ID</th>
           <th>Street Address</th>
           <th>City</th>
           <th>Price</th>
-          <th>Occupied</th>
+          <th className='occupants'>Occupied</th>
         </tr>
         </thead> 
         <tbody>
@@ -32,7 +32,7 @@ const PropertyList = () => {
           <td>{el.street_address}</td>
           <td>{el.city}</td>
           <td>${el.rental_price}</td>
-          <td>{el.occupied ? "Yes": "No"}</td>
+          <td className='occupants'>{el.occupied ? "Yes": "No"}</td>
         </tr>
       )
     }
