@@ -20,8 +20,8 @@ const MaintenanceRequest = (props) => {
     "other",
   ];
   const [emergency, toggleEmergency] = useState(false);
-  const [problemAreaArray, setproblemAreaArray] = useState([]);
-  const [selectedproblemArea, setSelectedproblemArea] = useState({});
+  const [problemAreaArray, setProblemAreaArray] = useState([]);
+  const [selectedProblemArea, setSelectedProblemArea] = useState({});
   const [requestDetails, setRequestDetails] = useState("");
   const [phoneNumber, setPhoneNumber] = useState("");
   const [email, setEmail] = useState("");
@@ -88,11 +88,12 @@ const MaintenanceRequest = (props) => {
           </Button>
         </section>
         <section id="problem-areas-list">
-          {problemAreas.map((problemArea) => {
+          {problemAreas.map((problemArea,i) => {
             let capitalized =
               problemArea.charAt(0).toUpperCase() + problemArea.slice(1);
             return (
               <Button
+                key={i}
                 id={
                   problemAreaArray.includes(problemArea)
                     ? "selected-button"
@@ -100,7 +101,7 @@ const MaintenanceRequest = (props) => {
                 }
                 variant="light"
                 onClick={() => {
-                  setSelectedproblemArea(problemArea);
+                  setSelectedProblemArea(problemArea);
                   problemAreaToggler(problemArea);
                 }}
               >

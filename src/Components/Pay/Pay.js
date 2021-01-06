@@ -87,26 +87,27 @@ const Pay = (props) => {
   // const [loading, setLoading] = useState(false);
 
   useEffect(() => {
+    const getUserInfo = async () => {
+      // setLoading(true);
+      Axios.get("/api/user")
+        .then(async (res)  => {
+  
+          if (res.data.pet) {
+            let rentWithPetFee = parseInt(res.data.rental_price) + 50;
+            setRentDue(rentWithPetFee);
+          } 
+          else {
+            setRentDue(res.data.rental_price);
+          }
+  
+          // setLoading(false);
+        })
+        .catch((err) => {props.history.push("/login")});
+    };
     getUserInfo();
-  }, []);
+  }, [props.history]);
 
-  const getUserInfo = async () => {
-    // setLoading(true);
-    Axios.get("/api/user")
-      .then(async (res)  => {
 
-        if (res.data.pet) {
-          let rentWithPetFee = parseInt(res.data.rental_price) + 50;
-          setRentDue(rentWithPetFee);
-        } 
-        else {
-          setRentDue(res.data.rental_price);
-        }
-
-        // setLoading(false);
-      })
-      .catch((err) => props.history.push("/login"));
-  };
   return (
     <div className="pay-page-container">
       <div>
