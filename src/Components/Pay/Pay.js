@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import "./Pay.scss";
 import { loadStripe } from "@stripe/stripe-js";
-import Spinner from "react-bootstrap/Spinner";
+// import Spinner from "react-bootstrap/Spinner";
 import swal from "sweetalert";
 import { withRouter } from "react-router-dom";
 import Axios from "axios";
@@ -20,14 +20,16 @@ const CardForm = (props) => {
 
   const processCardPayment = async (e) => {
     e.preventDefault();
+    toggleProcessing(true);
     const { error, paymentMethod } = await stripe.createPaymentMethod({
       type: "card",
       card: elements.getElement(CardElement),
     });
+    
     if (!error) {
       const { id } = paymentMethod;
       try {
-        const data = await axios
+        await axios
           .post("/api/charge", {
             id,
             amount: props.rentDue * 100,
@@ -35,22 +37,25 @@ const CardForm = (props) => {
           .then((res) => {
             props.PayProps.history.push("/");
             swal("Success", "Your payment was completed!", "success");
+            
           });
       } catch (error) {
         console.log(error);
       }
     }
+    
   };
 
   return (
     <>
+      {/* i want to create a spinner while the payment loads.
       {processing ? (
         <Spinner
           animation="border"
           variant="black"
           style={{ height: "300px", width: "300px" }}
         />
-      ) : (
+      ) : ( */}
         <form
           className="card_form"
           onSubmit={(e) => {
@@ -66,7 +71,8 @@ const CardForm = (props) => {
             Pay
           </button>
         </form>
-      )}
+      
+      {/* } */}
     </>
   );
 };
@@ -76,27 +82,28 @@ const stripePromise = loadStripe(process.env.REACT_APP_STRIPE_PUBLISHABLE_KEY);
 const Pay = (props) => {
   const [card, toggleCard] = useState(false);
   const [bank, toggleBank] = useState(false);
-
-  const [currentUser, setCurrentUser] = useState({});
   const [rentDue, setRentDue] = useState(0);
-  const [loading, setLoading] = useState(false);
+  // might set a loading spinner here instead.
+  // const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     getUserInfo();
   }, []);
 
   const getUserInfo = async () => {
-    setLoading(true);
+    // setLoading(true);
     Axios.get("/api/user")
-      .then((res) => {
-        setCurrentUser(res.data);
+      .then(async (res)  => {
 
         if (res.data.pet) {
           let rentWithPetFee = parseInt(res.data.rental_price) + 50;
           setRentDue(rentWithPetFee);
+        } 
+        else {
+          setRentDue(res.data.rental_price);
         }
 
-        setLoading(false);
+        // setLoading(false);
       })
       .catch((err) => props.history.push("/login"));
   };
