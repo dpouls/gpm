@@ -43,6 +43,7 @@ app.post('/api/charge', pc.processPayment)
 //Property Endpoints 
 app.get('/api/properties',prc.getAllProperties)
 app.post('/api/property', prc.createProperty)
+app.post('/api/property-renter', prc.linkPropertyRenter)
 //Maintenance Request Endpoints
 app.post('/api/request', rc.createRequest)
 app.get('/api/requests',rc.getAllRequests)
