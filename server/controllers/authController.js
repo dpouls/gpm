@@ -1,4 +1,5 @@
 const bcrypt = require('bcryptjs')
+//All these work with the new db schema as of June 2021
 module.exports = {
     register: async(req,res) => {
         const {username,password,email,isLandlord,firstName,lastName, occupants, pet, phoneNumber} = req.body 

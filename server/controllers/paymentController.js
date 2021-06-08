@@ -1,5 +1,6 @@
 const Stripe = require('stripe')
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY)
+//works with new db schema - June 2021
 module.exports = {
     processPayment: async (req, res) => {
         const { id, amount } = req.body;

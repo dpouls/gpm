@@ -115,7 +115,7 @@ module.exports = {
         }
     },
     getAllRequests: (req,res) => {
-        if(req.session.user.isadmin){
+        if(req.session.user.is_landlord){
             const db = req.app.get('db')
         db.requests.get_all_requests()
         .then(requests => res.status(200).send(requests))

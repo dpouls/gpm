@@ -30,7 +30,7 @@ const Header = (props) => {
           if(userInfo.is_landlord){
             setNavigationLinks(["Home",
             "Portal",
-            "Landlord",
+            "Landlord Portal",
             "Log out"])
             
         }
