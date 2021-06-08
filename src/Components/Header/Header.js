@@ -19,8 +19,7 @@ const Header = (props) => {
      Axios.get('/api/user').then(res => {
       setUserInfo(res.data)
     })
-
-    console.log('infinite loop')
+    console.log('useeffect 1 run', userInfo)
   },[])
     useEffect(() => {
       if(!userInfo.user_id){
@@ -28,14 +27,15 @@ const Header = (props) => {
           "Log in"])
       }
         else {
-          if(userInfo.isadmin){
+          if(userInfo.is_landlord){
             setNavigationLinks(["Home",
             "Portal",
-            "Admin",
+            "Landlord",
             "Log out"])
             
         }
       }
+    console.log('useeffect 2 run', userInfo)
       
     }, [userInfo,menuClicked])
 

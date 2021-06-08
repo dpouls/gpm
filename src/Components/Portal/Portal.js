@@ -33,7 +33,7 @@ const Portal = (props) => {
       ) : (
         <>
           <div className="user-info-container">
-            <p>Hello {currentUser.first_name}!</p>
+            <p>Hello {currentUser.fn}!</p>
             <div>
               Total rent due: $
               {currentUser.pet
