@@ -1,119 +1,31 @@
 module.exports = {
-    
+    //Both work with the new db as of July 2021
     createRequest: async (req, res) => {
-        console.log('createRequest hit')
-        if (req.session.user){
-            let { 
+        //not doing images yet.
+        if(req.session.user){
+            let {
                 property_id,
-                requestDetails,
+                content,
                 emergency,
-                phoneNumber,
-                email,
-                problemAreaArray
+                type,
+                complete
             } = req.body;
-            let  
-            bathroom = false,
-            bedroom = false,
-            yard = false,
-            kitchen = false,
-            living_room = false,
-            exterior = false,
-            appliance = false,
-            plumbing = false,
-            electrical = false,
-            other = false,
-            image_one = '',
-            image_two = '',
-            image_three = '',
-            is_complete = false;
-
-            let problemAreas = [
-                "bathroom",
-                "bedroom",
-                "yard",
-                "kitchen",
-                "living room",
-                "exterior",
-                "appliance",
-                "plumbing",
-                "electrical",
-                "other",
-              ]
-            await problemAreaArray.map((currentProblem) => {
-                if(problemAreas.includes(currentProblem)){
-                    switch(currentProblem){
-                        case 'emergency':
-                            emergency = true;
-                        break;
-                        case 'bathroom':
-                            bathroom = true;
-                        break;
-                        case 'bedroom':
-                            bedroom = true;
-                        break;
-                        case 'yard':
-                            yard = true;
-                        break;
-                        case 'kitchen':
-                            kitchen = true;
-                        break;
-                        case 'living room':
-                            living_room = true;
-                        break;
-                        case 'exterior':
-                            exterior = true;
-                        break;
-                        case 'appliance':
-                            appliance = true;
-                        break;
-                        case 'plumbing':
-                            plumbing = true;
-                        break;
-                        case 'electrical':
-                            electrical = true;
-                        break;
-                        case 'other':
-                            other = true;
-                        break;
-                        default:
-                            console.log('No problem area received.')
-                    }
-                    
-                }
-            });
-            let phone_number = phoneNumber;
-            let request_text_content = requestDetails
             const db = req.app.get('db')
             db.requests.create_request([
                 req.session.user.user_id, 
                 property_id, 
-                request_text_content,
+                content,
                 emergency,
-                bathroom,
-                bedroom,
-                yard,
-                kitchen,
-                living_room,
-                exterior,
-                appliance,
-                plumbing,
-                electrical,
-                other,
-                image_one,
-                image_two,
-                image_three,
-                phone_number,
-                email,
-                is_complete
+                type,
+                complete   
             ])
             .then(request => { 
                 res.status(200).send(request[0])
             }).catch(err => res.status(500).send(err))
-
-        } else {
-            res.sendStatus(404)
         }
     },
+    
+    
     getAllRequests: (req,res) => {
         if(req.session.user.is_landlord){
             const db = req.app.get('db')
@@ -122,7 +34,7 @@ module.exports = {
         .catch(err => res.status(500).send(err))
         }
         else {
-            res.status(404).send("Unauthorized")
+            res.status(401).send("Unauthorized")
         }
         
     }
