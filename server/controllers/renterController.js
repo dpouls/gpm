@@ -4,6 +4,7 @@ module.exports = {
     getRenterInfo: (req,res) => {
         if(req.session.user){
             //GETS RENTER INFO AND PROPERTIES ASSOCIATED. SIMILAR TO WHAT IS BELOW.
+            
         }
     },
 
