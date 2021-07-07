@@ -1,6 +1,12 @@
 const { restart } = require("nodemon")
 
 module.exports = {
+    getRenterInfo: (req,res) => {
+        if(req.session.user){
+            //GETS RENTER INFO AND PROPERTIES ASSOCIATED. SIMILAR TO WHAT IS BELOW.
+        }
+    },
+
     getUserInfo: (req,res) => {
         if (req.session.user){
             const db = req.app.get('db')
@@ -26,16 +32,5 @@ module.exports = {
         }
     },
 
-    getAllRenters: (req,res) => {
-        if(req.session.user.isadmin){
-            const db = req.app.get('db')
-            db.user.get_all_renters()
-            .then((renters) => {
-                res.status(200).send(renters)
-            })
-        }
-        else {
-            res.sendStatus(401)
-        }
-    }
+
 }
