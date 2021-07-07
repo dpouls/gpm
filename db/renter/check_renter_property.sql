@@ -1,0 +1,1 @@
+select * from property_renter where renter_id = $1;

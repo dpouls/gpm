@@ -4,8 +4,9 @@ const express = require('express'),
       session = require('express-session'),
       ac = require('./controllers/authController'),
       pc = require('./controllers/paymentController'),
-      uc = require('./controllers/renterController'),
-      rc = require('./controllers/requestController'),
+      rc = require('./controllers/renterController'),
+      lc = require('./controllers/landlordController'),
+      rqc = require('./controllers/requestController'),
       prc = require('./controllers/propertyController'),
       app = express();
 
@@ -36,8 +37,9 @@ app.post('/auth/logout', ac.logout)
 app.get('/auth/currentuser')
 
 //User Endpoints
-app.get('/api/user', uc.getUserInfo)
-app.get('/api/renters', uc.getAllRenters)
+app.get('/api/renter', rc.getRenterInfo)
+//Landlord Endpoints
+app.get('/api/renters', lc.getAllRenters)
 //Payment Endpoints
 app.post('/api/charge', pc.processPayment)
 //Property Endpoints 
@@ -45,7 +47,7 @@ app.get('/api/properties',prc.getAllProperties)
 app.post('/api/property', prc.createProperty)
 app.post('/api/property-renter', prc.linkPropertyRenter)
 //Maintenance Request Endpoints
-app.post('/api/request', rc.createRequest)
-app.get('/api/requests',rc.getAllRequests)
+app.post('/api/request', rqc.createRequest)
+app.get('/api/requests',rqc.getAllRequests)
 
 app.listen(SERVER_PORT, () => console.log(`Server running on port ${SERVER_PORT}`))
