@@ -1,7 +1,7 @@
 import Axios from "axios";
 import React, { useState, useEffect } from "react";
 import { withRouter } from "react-router-dom";
-import "./AdminPortal.scss";
+import "./LandlordPortal.scss";
 import NewRenter from "./NewRenter/NewRenter";
 import RenterList from "./RenterList/RenterList";
 import PropertyList from "./PropertyList/PropertyList";
@@ -11,12 +11,11 @@ import MRList from './MRList/MRList'
 const AdminPortal = (props) => {
   //Makes sure the user has admin authorization on mounting
   useEffect(() => {
-    Axios.get("/api/user").then((res) => {
-      if (!res.data.isadmin) {
+    Axios.get("/api/renter").then((res) => {
+      if (!res.data.is_landlord) {
         Axios.post("/auth/logout").then(props.history.push("/"));
       }
       
-      console.log("admin resdata");
     })
     .catch(err => props.history.push('/login'))
   }, []);

@@ -38,6 +38,7 @@ app.get('/auth/currentuser')
 
 //User Endpoints
 app.get('/api/renter', rc.getRenterInfo)
+app.get('/api/renters', rc.getLlRenters)
 //Landlord Endpoints
 app.get('/api/renters', lc.getAllRenters)
 //Payment Endpoints

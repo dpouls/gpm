@@ -89,7 +89,7 @@ const Pay = (props) => {
   useEffect(() => {
     const getUserInfo = async () => {
       // setLoading(true);
-      Axios.get("/api/user")
+      Axios.get("/api/renter")
         .then(async (res)  => {
   
           if (res.data.pet) {

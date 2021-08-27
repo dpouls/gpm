@@ -14,7 +14,7 @@ const Portal = (props) => {
 
   const getUserInfo = async () => {
     setLoading(true);
-    Axios.get("/api/user")
+    Axios.get("/api/renter")
       .then((res) => {
         console.log('userinfo:',res.data);
         setCurrentUser(res.data);

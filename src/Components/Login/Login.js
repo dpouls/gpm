@@ -12,7 +12,7 @@ const Login = (props) => {
         console.log(res.data)
         props.history.push("/portal")
     }
-    );
+    ).catch(err => console.log(err));
     setUsername("");
     setPassword("");
     e.preventDefault();

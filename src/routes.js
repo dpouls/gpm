@@ -6,7 +6,7 @@ import Portal from './Components/Portal/Portal'
 import Login from './Components/Login/Login'
 import Pay from './Components/Pay/Pay'
 import MaintenanceRequest from './Components/MaintenanceRequest/MaintenanceRequest'
-import AdminPortal from './Components/AdminPortal/AdminPortal';
+import LandlordPortal from './Components/LandlordPortal/LandlordPortal';
 
 export default (
     <Switch>
@@ -15,6 +15,6 @@ export default (
         <Route path='/login' component={Login} />
         <Route path='/pay' component={Pay} />
         <Route path='/request' component={MaintenanceRequest} />
-        <Route path='/admin' component={AdminPortal}/>
+        <Route path='/landlord' component={LandlordPortal}/>
     </Switch>
 )

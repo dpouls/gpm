@@ -25,6 +25,11 @@ module.exports = {
                     res.status(500).send(err);
                 })
             }
+    },
+    getLlRenters: (req,res) => {
+        if(req.session.user.is_landlord){
+            
+        }
     }
 
 

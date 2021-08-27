@@ -16,7 +16,7 @@ const Header = (props) => {
 
   const [userInfo, setUserInfo] = useState({})
    useEffect( () => {
-     Axios.get('/api/user').then(res => {
+     Axios.get('/api/renter').then(res => {
       setUserInfo(res.data)
     })
     console.log('useeffect 1 run', userInfo)
@@ -30,13 +30,10 @@ const Header = (props) => {
           if(userInfo.is_landlord){
             setNavigationLinks(["Home",
             "Portal",
-            "Landlord Portal",
+            "Landlord",
             "Log out"])
-            
         }
       }
-    console.log('useeffect 2 run', userInfo)
-      
     }, [userInfo,menuClicked])
 
   return (
